@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CreativeStudio - Diseño Gráfico Profesional</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#fdf4ff',
+                            100: '#fae8ff',
+                            500: '#d946ef',
+                            600: '#c026d3',
+                            700: '#a21caf',
+                            900: '#701a75',
+                        },
+                        accent: {
+                            50: '#fff7ed',
+                            100: '#ffedd5',
+                            500: '#f97316',
+                            600: '#ea580c',
+                        },
+                        dark: {
+                            900: '#0f0f0f',
+                            800: '#1a1a1a',
+                            700: '#262626',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gradient-hero {
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 50%, #262626 100%);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #d946ef, #f97316);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        .portfolio-card {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+        .portfolio-card:hover {
+            transform: translateY(-10px);
+        }
+        .portfolio-card:hover .portfolio-overlay {
+            opacity: 1;
+        }
+        .portfolio-card:hover img {
+            transform: scale(1.1);
+        }
+        .portfolio-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            opacity: 0;
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 2rem;
+        }
+        .service-card {
+            transition: all 0.3s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        .feature-icon {
+            background: linear-gradient(135deg, #fdf4ff, #fae8ff);
+        }
+        .testimonial-card {
+            background: white;
+            transition: all 0.3s ease;
+        }
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        .faq-item {
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+        .faq-answer.open {
+            max-height: 500px;
+            padding-top: 16px;
+            padding-bottom: 16px;
+        }
+        .faq-icon {
+            transition: transform 0.3s ease;
+        }
+        .faq-icon.rotate {
+            transform: rotate(180deg);
+        }
+        .step-number {
+            background: linear-gradient(135deg, #d946ef, #c026d3);
+        }
+        .cta-gradient {
+            background: linear-gradient(135deg, #701a75 0%, #c026d3 100%);
+        }
+        .stats-counter {
+            background: linear-gradient(135deg, #fdf4ff, #fae8ff);
+        }
+        .check-icon {
+            background: linear-gradient(135deg, #d946ef, #c026d3);
+        }
+        .skill-bar {
+            background: linear-gradient(90deg, #d946ef, #f97316);
+        }
+    </style>
+</head>
+<body class="font-sans antialiased text-gray-800 bg-white">
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="fixed w-full top-0 z-50 bg-white/95 backdrop-blur-md shadow-sm transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-gradient-to-br from-primary-600 to-accent-500 rounded-xl flex items-center justify-center">
+                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
+                        </svg>
+                    </div>
+                    <span class="text-2xl font-bold font-serif text-dark-900">Creative<span class="text-primary-600">Studio</span></span>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#portfolio" class="text-gray-600 hover:text-primary-600 font-medium transition-colors">Portafolio</a>
+                    <a href="#servicios" class="text-gray-600 hover:text-primary-600 font-medium transition-colors">Servicios</a>
+                    <a href="#sobre-mi" class="text-gray-600 hover:text-primary-600 font-medium transition-colors">Sobre Mí</a>
+                    <a href="#proceso" class="text-gray-600 hover:text-primary-600 font-medium transition-colors">Proceso</a>
+                    <a href="#testimonios" class="text-gray-600 hover:text-primary-600 font-medium transition-colors">Clientes</a>
+                    <a href="#contacto" class="text-gray-600 hover:text-primary-600 font-medium transition-colors">Contacto</a>
+                </nav>
+
+                <!-- CTA Button -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="#contacto" class="bg-primary-600 hover:bg-primary-700 text-white px-6 py-2.5 rounded-full font-semibold transition-all hover:shadow-lg hover:shadow-primary-500/30">
+                        Hablemos
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden p-2 rounded-lg hover:bg-gray-100" onclick="toggleMobileMenu()">
+                    <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-t">
+            <div class="px-4 py-4 space-y-3">
+                <a href="#portfolio" class="block py-2 text-gray-600 hover:text-primary-600">Portafolio</a>
+                <a href="#servicios" class="block py-2 text-gray-600 hover:text-primary-600">Servicios</a>
+                <a href="#sobre-mi" class="block py-2 text-gray-600 hover:text-primary-600">Sobre Mí</a>
+                <a href="#proceso" class="block py-2 text-gray-600 hover:text-primary-600">Proceso</a>
+                <a href="#testimonios" class="block py-2 text-gray-600 hover:text-primary-600">Clientes</a>
+                <a href="#contacto" class="block py-2 text-gray-600 hover:text-primary-600">Contacto</a>
+                <div class="pt-4 border-t">
+                    <a href="#contacto" class="block text-center bg-primary-600 text-white py-3 rounded-full font-semibold">Hablemos</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="relative pt-32 pb-20 lg:pt-40 lg:pb-32 gradient-hero overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute top-20 right-10 w-72 h-72 bg-primary-500/10 rounded-full blur-3xl animate-float"></div>
+        <div class="absolute bottom-10 left-10 w-96 h-96 bg-accent-500/10 rounded-full blur-3xl animate-float" style="animation-delay: 2s;"></div>
+
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Hero Content -->
+                <div class="text-center lg:text-left">
+                    <div class="inline-flex items-center px-4 py-2 bg-white/10 rounded-full text-white/90 text-sm font-medium mb-6 backdrop-blur-sm">
+                        <span class="w-2 h-2 bg-primary-400 rounded-full mr-2 animate-pulse"></span>
+                        Disponible para proyectos freelance
+                    </div>
+                    
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6 font-serif">
+                        Diseño que <br>
+                        <span class="gradient-text">cuenta historias</span>
+                    </h1>
+                    
+                    <p class="text-lg md:text-xl text-gray-400 mb-8 max-w-xl mx-auto lg:mx-0">
+                        Diseñador gráfico con más de 8 años de experiencia creando identidades visuales, packaging, ilustraciones y experiencias digitales memorables.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8">
+                        <a href="#portfolio" class="bg-white text-dark-900 px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-50 transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2">
+                            Ver Portafolio
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg>
+                        </a>
+                        <a href="#contacto" class="glass-card text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/10 transition-all flex items-center justify-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                            </svg>
+                            Contactar
+                        </a>
+                    </div>
+
+                    <!-- Skills Tags -->
+                    <div class="flex flex-wrap items-center justify-center lg:justify-start gap-3 text-sm">
+                        <span class="px-4 py-2 bg-white/10 rounded-full text-white/80">Branding</span>
+                        <span class="px-4 py-2 bg-white/10 rounded-full text-white/80">UI/UX</span>
+                        <span class="px-4 py-2 bg-white/10 rounded-full text-white/80">Ilustración</span>
+                        <span class="px-4 py-2 bg-white/10 rounded-full text-white/80">Packaging</span>
+                        <span class="px-4 py-2 bg-white/10 rounded-full text-white/80">Motion</span>
+                    </div>
+                </div>
+
+                <!-- Hero Image / Portfolio Preview -->
+                <div class="relative hidden lg:block">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="space-y-4">
+                            <div class="portfolio-card rounded-2xl overflow-hidden shadow-2xl">
+                                <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&h=500&fit=crop" alt="Branding Project" class="w-full h-48 object-cover transition-transform duration-500">
+                                <div class="portfolio-overlay">
+                                    <span class="text-white font-semibold">Branding</span>
+                                    <span class="text-white/70 text-sm">Identidad Visual</span>
+                                </div>
+                            </div>
+                            <div class="portfolio-card rounded-2xl overflow-hidden shadow-2xl">
+                                <img src="https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=400&h=400&fit=crop" alt="Packaging Design" class="w-full h-56 object-cover transition-transform duration-500">
+                                <div class="portfolio-overlay">
+                                    <span class="text-white font-semibold">Packaging</span>
+                                    <span class="text-white/70 text-sm">Diseño de Producto</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space-y-4 pt-8">
+                            <div class="portfolio-card rounded-2xl overflow-hidden shadow-2xl">
+                                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&h=400&fit=crop" alt="Illustration" class="w-full h-56 object-cover transition-transform duration-500">
+                                <div class="portfolio-overlay">
+                                    <span class="text-white font-semibold">Ilustración</span>
+                                    <span class="text-white/70 text-sm">Arte Digital</span>
+                                </div>
+                            </div>
+                            <div class="portfolio-card rounded-2xl overflow-hidden shadow-2xl">
+                                <img src="https://images.unsplash.com/photo-1551650975-87deedd944c3?w=400&h=500&fit=crop" alt="UI Design" class="w-full h-48 object-cover transition-transform duration-500">
+                                <div class="portfolio-overlay">
+                                    <span class="text-white font-semibold">UI/UX</span>
+                                    <span class="text-white/70 text-sm">Diseño Digital</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Floating Badge -->
+                    <div class="absolute -bottom-4 -right-4 bg-white rounded-2xl shadow-xl p-4 animate-float" style="animation-delay: 1s;">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center">
+                                <svg class="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-sm text-gray-500">Proyectos completados</p>
+                                <p class="font-bold text-gray-800">200+</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <svg class="w-6 h-6 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+            </svg>
+        </div>
+    </section>
+        <!-- PORTFOLIO SECTION -->
+    <section id="portfolio" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="inline-block px-4 py-1 bg-primary-100 text-primary-700 rounded-full text-sm font-semibold mb-4">Portafolio</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-serif">Trabajos Destacados</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">Una selección de proyectos que representan mi pasión por el diseño y la creatividad.</p>
+            </div>
+
+            <!-- Filter Buttons -->
+            <div class="flex flex-wrap justify-center gap-4 mb-12">
+                <button class="px-6 py-2 bg-primary-600 text-white rounded-full font-medium transition-all hover:shadow-lg" onclick="filterPortfolio('all')">Todos</button>
+                <button class="px-6 py-2 bg-white text-gray-600 border border-gray-200 rounded-full font-medium hover:bg-primary-50 hover:text-primary-600 transition-all" onclick="filterPortfolio('branding')">Branding</button>
+                <button class="px-6 py-2 bg-white text-gray-600 border border-gray-200 rounded-full font-medium hover:bg-primary-50 hover:text-primary-600 transition-all" onclick="filterPortfolio('packaging')">Packaging</button>
+                <button class="px-6 py-2 bg-white text-gray-600 border border-gray-200 rounded-full font-medium hover:bg-primary-50 hover:text-primary-600 transition-all" onclick="filterPortfolio('digital')">Digital</button>
+                <button class="px-6 py-2 bg-white text-gray-600 border border-gray-200 rounded-full font-medium hover:bg-primary-50 hover:text-primary-600 transition-all" onclick="filterPortfolio('illustration')">Ilustración</button>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="portfolioGrid">
+                <!-- Project 1 -->
+                <div class="portfolio-card rounded-2xl overflow-hidden shadow-lg group" data-category="branding">
+                    <div class="relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?w=600&h=400&fit=crop" alt="Brand Identity" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="portfolio-overlay">
+                            <span class="text-white font-bold text-lg">Aura Cosmetics</span>
+                            <span class="text-white/70 text-sm">Identidad de Marca</span>
+                            <div class="mt-4 flex gap-2">
+                                <span class="px-3 py-1 bg-white/20 rounded-full text-xs text-white">Branding</span>
+                                <span class="px-3 py-1 bg-white/20 rounded-full text-xs text-white">Packaging</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="portfolio-card rounded-2xl overflow-hidden shadow-lg group" data-category="digital">
+                    <div class="relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1559028012-481c04fa702d?w=600&h=400&fit=crop" alt="UI Design" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="portfolio-overlay">
+                            <span class="text-white font-bold text-lg">Fintech App</span>
+                            <span class="text-white/70 text-sm">Diseño UI/UX</span>
+                            <div class="mt-4 flex gap-2">
+                                <span class="px-3 py-1 bg-white/20 rounded-full text-xs text-white">UI/UX</span>
+                                <span class="px-3 py-1 bg-white/20 rounded-full text-xs text-white">App</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="portfolio-card rounded-2xl overflow-hidden shadow-lg group" data-category="illustration">
+                    <div class="relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&h=400&fit=crop" alt="Illustration" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="portfolio-overlay">
+                            <span class="text-white font-bold text-lg">Naturaleza Viva</span>
+                            <span class="text-white/70 text-sm">Ilustración Digital</span>
+                            <div class="mt-4 flex gap-2">
+                                <span class="px-3 py-1 bg-white/20 rounded-full text-xs text-white">Ilustración</span>
+                                <span class="px-3 py-1 bg-white/20 rounded-full text-xs text-white">Arte</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="portfolio-card rounded-2xl overflow-hidden shadow-lg group" data-category="packaging">
+                    <div class="relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=600&h=400&fit=crop" alt="Packaging" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="portfolio-overlay">
+                            <span class="text-white font-bold text-lg">Organic Tea</span>
+                            <span class="text-white/70 text-sm">Diseño de Packaging</span>
+                            <div class="mt-4 flex gap-2">
+                                <span class="px-3 py-1 bg-white/20 rounded-full text-xs text-white">Packaging</span>
+                                <span class="px-3 py-1 bg-white/20 rounded-full text-xs text-white">Branding</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 5 -->
+                <div class="portfolio-card rounded-2xl overflow-hidden shadow-lg group" data-category="branding">
+                    <div class="relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1634942537034-2531766767d1?w=600&h=400&fit=crop" alt="Brand Identity" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="portfolio-overlay">
+                            <span class="text-white font-bold text-lg">TechStart</span>
+                            <span class="text-white/70 text-sm">Identidad Corporativa</span>
+                            <div class="mt-4 flex gap-2">
+                                <span class="px-3 py-1 bg-white/20 rounded-full text-xs text-white">Branding</span>
+                                <span class="px-3 py-1 bg-white/20 rounded-full text-xs text-white">Logo</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 6 -->
+                <div class="portfolio-card rounded-2xl overflow-hidden shadow-lg group" data-category="digital">
+                    <div class="relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=400&fit=crop" alt="Web Design" class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110">
+                        <div class="portfolio-overlay">
+                            <span class="text-white font-bold text-lg">E-commerce Lux</span>
+                            <span class="text-white/70 text-sm">Diseño Web</span>
+                            <div class="mt-4 flex gap-2">
+                                <span class="px-3 py-1 bg-white/20 rounded-full text-xs text-white">Web</span>
+                                <span class="px-3 py-1 bg-white/20 rounded-full text-xs text-white">E-commerce</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12">
+                <a href="#" class="inline-flex items-center gap-2 border-2 border-primary-600 text-primary-600 hover:bg-primary-600 hover:text-white px-8 py-3 rounded-full font-semibold transition-all">
+                    Ver Todos los Proyectos
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES SECTION -->
+    <section id="servicios" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="inline-block px-4 py-1 bg-primary-100 text-primary-700 rounded-full text-sm font-semibold mb-4">Servicios</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-serif">¿Qué puedo hacer por ti?</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">Desde la concepción de una marca hasta su implementación completa en todos los touchpoints.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="service-card bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
+                    <div class="feature-icon w-14 h-14 rounded-xl flex items-center justify-center mb-5">
+                        <svg class="w-7 h-7 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Branding e Identidad</h3>
+                    <p class="text-gray-600 mb-4">Creación de marcas completas: logo, paleta de colores, tipografía, guías de estilo y aplicaciones.</p>
+                    <ul class="space-y-2 mb-6">
+                        <li class="flex items-center gap-2 text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Diseño de logo
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Manual de marca
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Brand strategy
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="service-card bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
+                    <div class="feature-icon w-14 h-14 rounded-xl flex items-center justify-center mb-5">
+                        <svg class="w-7 h-7 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">UI/UX Design</h3>
+                    <p class="text-gray-600 mb-4">Diseño de interfaces intuitivas y atractivas para apps, web y plataformas digitales.</p>
+                    <ul class="space-y-2 mb-6">
+                        <li class="flex items-center gap-2 text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Wireframes
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Prototipos
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Design systems
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="service-card bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
+                    <div class="feature-icon w-14 h-14 rounded-xl flex items-center justify-center mb-5">
+                        <svg class="w-7 h-7 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Packaging</h3>
+                    <p class="text-gray-600 mb-4">Diseño de empaques que destacan en el anaquel y comunican la esencia de tu producto.</p>
+                    <ul class="space-y-2 mb-6">
+                        <li class="flex items-center gap-2 text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Etiquetas
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Cajas
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Mockups 3D
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="service-card bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
+                    <div class="feature-icon w-14 h-14 rounded-xl flex items-center justify-center mb-5">
+                        <svg class="w-7 h-7 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Ilustración</h3>
+                    <p class="text-gray-600 mb-4">Ilustraciones personalizadas para editoriales, publicidad, productos digitales y más.</p>
+                    <ul class="space-y-2 mb-6">
+                        <li class="flex items-center gap-2 text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Ilustración digital
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Vectorial
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Iconografía
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Service 5 -->
+                <div class="service-card bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
+                    <div class="feature-icon w-14 h-14 rounded-xl flex items-center justify-center mb-5">
+                        <svg class="w-7 h-7 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Motion Graphics</h3>
+                    <p class="text-gray-600 mb-4">Animaciones y videos explicativos que dan vida a tu marca y comunican con impacto.</p>
+                    <ul class="space-y-2 mb-6">
+                        <li class="flex items-center gap-2 text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Animaciones 2D
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Motion logos
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Videos explicativos
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Service 6 -->
+                <div class="service-card bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
+                    <div class="feature-icon w-14 h-14 rounded-xl flex items-center justify-center mb-5">
+                        <svg class="w-7 h-7 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Editorial</h3>
+                    <p class="text-gray-600 mb-4">Diseño de publicaciones, revistas, libros y materiales impresos con excelencia tipográfica.</p>
+                    <ul class="space-y-2 mb-6">
+                        <li class="flex items-center gap-2 text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Libros
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Revistas
+                        </li>
+                        <li class="flex items-center gap-2 text-sm text-gray-600">
+                            <svg class="w-4 h-4 text-primary-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Brochures
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT ME SECTION -->
+    <section id="sobre-mi" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- About Image -->
+                <div class="relative">
+                    <div class="relative rounded-2xl overflow-hidden shadow-2xl">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=700&fit=crop" alt="Designer Portrait" class="w-full h-auto object-cover">
+                    </div>
+                    <!-- Experience Badge -->
+                    <div class="absolute -bottom-6 -right-6 bg-white rounded-2xl shadow-xl p-6">
+                        <div class="text-center">
+                            <span class="text-4xl font-bold text-primary-600">8+</span>
+                            <p class="text-sm text-gray-600 mt-1">Años de<br>experiencia</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- About Content -->
+                <div>
+                    <span class="inline-block px-4 py-1 bg-primary-100 text-primary-700 rounded-full text-sm font-semibold mb-4">Sobre Mí</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6 font-serif">Hola, soy Carlos Méndez</h2>
+                    <p class="text-gray-600 mb-6 leading-relaxed">
+                        Diseñador gráfico apasionado por crear experiencias visuales que conectan emocionalmente con las personas. Con más de 8 años en la industria, he tenido el privilegio de trabajar con startups, agencias y marcas establecidas de todo el mundo.
+                    </p>
+                    <p class="text-gray-600 mb-8 leading-relaxed">
+                        Mi filosofía es simple: el buen diseño no solo debe verse bien, debe resolver problemas reales. Cada proyecto es una oportunidad para contar una historia única a través de colores, formas y tipografía.
+                    </p>
+
+                    <!-- Skills -->
+                    <div class="space-y-4 mb-8">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-sm font-medium text-gray-700">Branding & Identidad</span>
+                                <span class="text-sm text-primary-600">95%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="skill-bar h-2 rounded-full" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-sm font-medium text-gray-700">UI/UX Design</span>
+                                <span class="text-sm text-primary-600">90%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="skill-bar h-2 rounded-full" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-sm font-medium text-gray-700">Ilustración</span>
+                                <span class="text-sm text-primary-600">85%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="skill-bar h-2 rounded-full" style="width: 85%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="text-sm font-medium text-gray-700">Motion Graphics</span>
+                                <span class="text-sm text-primary-600">80%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="skill-bar h-2 rounded-full" style="width: 80%"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tools -->
+                    <div class="flex flex-wrap gap-3">
+                        <span class="px-4 py-2 bg-white rounded-full text-sm text-gray-600 shadow-sm border border-gray-100">Adobe Illustrator</span>
+                        <span class="px-4 py-2 bg-white rounded-full text-sm text-gray-600 shadow-sm border border-gray-100">Photoshop</span>
+                        <span class="px-4 py-2 bg-white rounded-full text-sm text-gray-600 shadow-sm border border-gray-100">Figma</span>
+                        <span class="px-4 py-2 bg-white rounded-full text-sm text-gray-600 shadow-sm border border-gray-100">After Effects</span>
+                        <span class="px-4 py-2 bg-white rounded-full text-sm text-gray-600 shadow-sm border border-gray-100">Blender</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+        <!-- PROCESS SECTION -->
+    <section id="proceso" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="inline-block px-4 py-1 bg-primary-100 text-primary-700 rounded-full text-sm font-semibold mb-4">Mi Proceso</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-serif">Cómo trabajo</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">Un proceso estructurado que garantiza resultados excepcionales en cada proyecto.</p>
+            </div>
+
+            <div class="grid md:grid-cols-4 gap-8 relative">
+                <!-- Connecting Line -->
+                <div class="hidden md:block absolute top-1/4 left-1/6 right-1/6 h-0.5 bg-primary-200 -translate-y-1/2 z-0"></div>
+
+                <!-- Step 1 -->
+                <div class="relative z-10 text-center">
+                    <div class="step-number w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+                        <span class="text-2xl font-bold text-white">1</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Descubrimiento</h3>
+                    <p class="text-gray-600">Conversación inicial para entender tus objetivos, audiencia y visión del proyecto.</p>
+                    <div class="mt-4 inline-flex items-center gap-2 text-primary-600 text-sm font-medium">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                        </svg>
+                        Brief creativo
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="relative z-10 text-center">
+                    <div class="step-number w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+                        <span class="text-2xl font-bold text-white">2</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Estrategia</h3>
+                    <p class="text-gray-600">Investigación de mercado, análisis de competencia y definición de conceptos creativos.</p>
+                    <div class="mt-4 inline-flex items-center gap-2 text-primary-600 text-sm font-medium">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
+                        Moodboards
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="relative z-10 text-center">
+                    <div class="step-number w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+                        <span class="text-2xl font-bold text-white">3</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Diseño</h3>
+                    <p class="text-gray-600">Creación de propuestas visuales, iteraciones basadas en feedback y refinamiento.</p>
+                    <div class="mt-4 inline-flex items-center gap-2 text-primary-600 text-sm font-medium">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
+                        </svg>
+                        3 rondas de revisiones
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="relative z-10 text-center">
+                    <div class="step-number w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+                        <span class="text-2xl font-bold text-white">4</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3">Entrega</h3>
+                    <p class="text-gray-600">Archivos finales en todos los formatos, guías de uso y soporte post-entrega.</p>
+                    <div class="mt-4 inline-flex items-center gap-2 text-primary-600 text-sm font-medium">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                        Archivos listos para usar
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS SECTION -->
+    <section id="testimonios" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="inline-block px-4 py-1 bg-primary-100 text-primary-700 rounded-full text-sm font-semibold mb-4">Testimonios</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-serif">Lo que dicen mis clientes</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">Relaciones profesionales basadas en confianza, creatividad y resultados.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card rounded-2xl p-8 shadow-lg border border-gray-100">
+                    <div class="flex items-center gap-1 mb-4">
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                        </svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                        </svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                        </svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                        </svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                        </svg>
+                    </div>
+                    <p class="text-gray-700 mb-6 leading-relaxed">"Carlos capturó la esencia de nuestra marca perfectamente. El logo y la identidad visual que creó superaron todas nuestras expectativas. Profesional, creativo y siempre a tiempo."</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-primary-400 to-primary-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                            AM
+                        </div>
+                        <div>
+                            <p class="font-semibold text-gray-900">Ana Martínez</p>
+                            <p class="text-sm text-gray-500">CEO de Aura Cosmetics</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card rounded-2xl p-8 shadow-lg border border-gray-100">
+                    <div class="flex items-center gap-1 mb-4">
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                        </svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                        </svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                        </svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                        </svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                        </svg>
+                    </div>
+                    <p class="text-gray-700 mb-6 leading-relaxed">"El packaging que diseñó para nuestra línea de té orgánico fue un game changer. Las ventas aumentaron 40% en el primer trimestre. Su atención al detalle es incomparable."</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-accent-400 to-accent-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                            DR
+                        </div>
+                        <div>
+                            <p class="font-semibold text-gray-900">Diego Ruiz</p>
+                            <p class="text-sm text-gray-500">Fundador de Organic Tea</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card rounded-2xl p-8 shadow-lg border border-gray-100">
+                    <div class="flex items-center gap-1 mb-4">
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                        </svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                        </svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                        </svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                        </svg>
+                        <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                        </svg>
+                    </div>
+                    <p class="text-gray-700 mb-6 leading-relaxed">"Trabajar con Carlos fue una experiencia increíble. Entendió nuestra visión desde el primer día y la app que diseñó superó todas las métricas de usabilidad. Altamente recomendado."</p>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-lg">
+                            SF
+                        </div>
+                        <div>
+                            <p class="font-semibold text-gray-900">Sofía Fernández</p>
+                            <p class="text-sm text-gray-500">Product Manager en Fintech App</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Awards/Recognition -->
+            <div class="mt-16 pt-12 border-t border-gray-200">
+                <p class="text-center text-gray-500 text-sm mb-8">Reconocimientos</p>
+                <div class="flex flex-wrap justify-center items-center gap-8 opacity-50">
+                    <div class="flex items-center gap-2 text-gray-400 font-bold text-lg">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"></path>
+                        </svg>
+                        Awwwards
+                    </div>
+                    <div class="flex items-center gap-2 text-gray-400 font-bold text-lg">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"></path>
+                        </svg>
+                        Behance
+                    </div>
+                    <div class="flex items-center gap-2 text-gray-400 font-bold text-lg">
+                        <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"></path>
+                        </svg>
+                        Dribbble
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section id="faq" class="py-20 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="inline-block px-4 py-1 bg-primary-100 text-primary-700 rounded-full text-sm font-semibold mb-4">Preguntas Frecuentes</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-serif">¿Tienes dudas?</h2>
+                <p class="text-lg text-gray-600">Respuestas a las preguntas más comunes sobre mi trabajo y proceso.</p>
+            </div>
+
+            <div class="space-y-4">
+                <!-- FAQ Item 1 -->
+                <div class="faq-item bg-gray-50 rounded-2xl overflow-hidden shadow-sm">
+                    <button class="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-gray-100 transition-colors" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-gray-900 pr-4">¿Cuál es tu tarifa por proyecto?</span>
+                        <svg class="faq-icon w-5 h-5 text-primary-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="faq-answer px-6">
+                        <p class="text-gray-600 pb-5">Mis tarifas varían según el alcance y complejidad del proyecto. Un logo básico comienza en $500 USD, una identidad de marca completa desde $2,000 USD, y proyectos de UI/UX desde $3,000 USD. Siempre proporciono un presupuesto detallado después de la consulta inicial gratuita.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="faq-item bg-gray-50 rounded-2xl overflow-hidden shadow-sm">
+                    <button class="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-gray-100 transition-colors" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-gray-900 pr-4">¿Cuánto tiempo toma un proyecto típico?</span>
+                        <svg class="faq-icon w-5 h-5 text-primary-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="faq-answer px-6">
+                        <p class="text-gray-600 pb-5">Un logo suele tomar 2-3 semanas, una identidad de marca completa 4-6 semanas, y un proyecto de UI/UX puede tomar 6-8 semanas. Los timelines dependen de la complejidad, número de revisiones y tu disponibilidad para feedback. Siempre establecemos un calendario claro al inicio.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="faq-item bg-gray-50 rounded-2xl overflow-hidden shadow-sm">
+                    <button class="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-gray-100 transition-colors" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-gray-900 pr-4">¿Cuántas revisiones incluyen tus proyectos?</span>
+                        <svg class="faq-icon w-5 h-5 text-primary-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="faq-answer px-6">
+                        <p class="text-gray-600 pb-5">Incluyo 3 rondas de revisiones en todos mis proyectos. La primera presentación incluye 2-3 conceptos iniciales. Cada ronda de revisiones permite ajustes basados en tu feedback. Revisiones adicionales pueden coordinarse con un costo extra por hora.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div class="faq-item bg-gray-50 rounded-2xl overflow-hidden shadow-sm">
+                    <button class="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-gray-100 transition-colors" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-gray-900 pr-4">¿En qué formatos entregas los archivos?</span>
+                        <svg class="faq-icon w-5 h-5 text-primary-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="faq-answer px-6">
+                        <p class="text-gray-600 pb-5">Entrego archivos en todos los formatos necesarios: vectoriales (AI, EPS, SVG, PDF), rasterizados (PNG, JPG en alta resolución), y fuentes. Para proyectos web incluyo archivos Figma editables. Todo organizado en una carpeta estructurada con guías de uso.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 5 -->
+                <div class="faq-item bg-gray-50 rounded-2xl overflow-hidden shadow-sm">
+                    <button class="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-gray-100 transition-colors" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-gray-900 pr-4">¿Trabajas con clientes internacionales?</span>
+                        <svg class="faq-icon w-5 h-5 text-primary-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="faq-answer px-6">
+                        <p class="text-gray-600 pb-5">¡Absolutamente! Trabajo con clientes de todo el mundo. Las reuniones se realizan por Zoom/Meet y la comunicación por email o Slack. Acepto pagos internacionales via PayPal, Wise o transferencia bancaria. He trabajado con clientes en USA, Europa, Asia y Latinoamérica.</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 6 -->
+                <div class="faq-item bg-gray-50 rounded-2xl overflow-hidden shadow-sm">
+                    <button class="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-gray-100 transition-colors" onclick="toggleFaq(this)">
+                        <span class="font-semibold text-gray-900 pr-4">¿Ofreces soporte después de la entrega?</span>
+                        <svg class="faq-icon w-5 h-5 text-primary-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
+                    </button>
+                    <div class="faq-answer px-6">
+                        <p class="text-gray-600 pb-5">Sí, incluyo 30 días de soporte post-entrega para resolver dudas sobre el uso de archivos o pequeños ajustes. También ofrezco paquetes de mantenimiento mensual para clientes que necesitan diseño continuo. Mi objetivo es construir relaciones a largo plazo.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Still have questions -->
+            <div class="mt-12 text-center bg-gray-50 rounded-2xl p-8 shadow-lg">
+                <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                    </svg>
+                </div>
+                <h3 class="text-xl font-bold text-gray-900 mb-2">¿Tienes un proyecto en mente?</h3>
+                <p class="text-gray-600 mb-6">Hablemos sobre cómo puedo ayudarte a hacerlo realidad.</p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#contacto" class="inline-flex items-center gap-2 bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-full font-semibold transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                        </svg>
+                        Enviar Email
+                    </a>
+                    <a href="#" class="inline-flex items-center gap-2 border-2 border-primary-600 text-primary-600 hover:bg-primary-50 px-6 py-3 rounded-full font-semibold transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                        </svg>
+                        Agendar Llamada
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+        <!-- CONTACT SECTION -->
+    <section id="contacto" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12">
+                <!-- Contact Info -->
+                <div>
+                    <span class="inline-block px-4 py-1 bg-primary-100 text-primary-700 rounded-full text-sm font-semibold mb-4">Contacto</span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6 font-serif">Hagamos algo increíble juntos</h2>
+                    <p class="text-gray-600 mb-8 leading-relaxed">
+                        ¿Tienes un proyecto en mente? Me encantaría escuchar sobre él. Completa el formulario o contáctame directamente por cualquiera de estos canales.
+                    </p>
+
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900 mb-1">Email</h4>
+                                <p class="text-gray-600">hola@creativestudio.com</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900 mb-1">Teléfono</h4>
+                                <p class="text-gray-600">+52 55 1234 5678</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900 mb-1">Ubicación</h4>
+                                <p class="text-gray-600">Ciudad de México, México</p>
+                                <p class="text-sm text-gray-500">Disponible para proyectos remotos worldwide</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                                <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900 mb-1">Horario</h4>
+                                <p class="text-gray-600">Lun - Vie: 9:00 - 18:00 CST</p>
+                                <p class="text-sm text-gray-500">Respuesta en 24h máximo</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Social Links -->
+                    <div class="mt-8">
+                        <h4 class="font-semibold text-gray-900 mb-4">Sígueme</h4>
+                        <div class="flex gap-4">
+                            <a href="#" class="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center hover:bg-primary-50 hover:text-primary-600 transition-all">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"></path>
+                                </svg>
+                            </a>
+                            <a href="#" class="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center hover:bg-primary-50 hover:text-primary-600 transition-all">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path>
+                                </svg>
+                            </a>
+                            <a href="#" class="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center hover:bg-primary-50 hover:text-primary-600 transition-all">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path>
+                                </svg>
+                            </a>
+                            <a href="#" class="w-12 h-12 bg-white rounded-xl shadow-sm flex items-center justify-center hover:bg-primary-50 hover:text-primary-600 transition-all">
+                                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="bg-white rounded-2xl shadow-xl p-8">
+                    <form onsubmit="event.preventDefault(); alert('¡Mensaje enviado! Te contactaré pronto.');">
+                        <div class="grid md:grid-cols-2 gap-6 mb-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Nombre</label>
+                                <input type="text" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all" placeholder="Tu nombre" required>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                                <input type="email" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all" placeholder="tu@email.com" required>
+                            </div>
+                        </div>
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Tipo de Proyecto</label>
+                            <select class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all">
+                                <option>Branding e Identidad</option>
+                                <option>UI/UX Design</option>
+                                <option>Packaging</option>
+                                <option>Ilustración</option>
+                                <option>Motion Graphics</option>
+                                <option>Editorial</option>
+                                <option>Otro</option>
+                            </select>
+                        </div>
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Presupuesto Aproximado</label>
+                            <select class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all">
+                                <option>Menos de $1,000 USD</option>
+                                <option>$1,000 - $3,000 USD</option>
+                                <option>$3,000 - $5,000 USD</option>
+                                <option>$5,000 - $10,000 USD</option>
+                                <option>Más de $10,000 USD</option>
+                            </select>
+                        </div>
+                        <div class="mb-6">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Mensaje</label>
+                            <textarea rows="4" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition-all resize-none" placeholder="Cuéntame sobre tu proyecto..." required></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-primary-600 hover:bg-primary-700 text-white py-4 rounded-xl font-bold text-lg transition-all hover:shadow-lg flex items-center justify-center gap-2">
+                            Enviar Mensaje
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FINAL CTA SECTION -->
+    <section class="py-20 cta-gradient relative overflow-hidden">
+        <!-- Background Elements -->
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-0 left-0 w-96 h-96 bg-white rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
+            <div class="absolute bottom-0 right-0 w-96 h-96 bg-white rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
+        </div>
+
+        <div class="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl md:text-5xl font-bold text-white mb-6 font-serif">¿Listo para empezar?</h2>
+            <p class="text-xl text-white/80 mb-8 max-w-2xl mx-auto">Cada gran proyecto comienza con una conversación. Agenda una consulta gratuita de 30 minutos para discutir tu idea.</p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+                <a href="#contacto" class="bg-white text-primary-700 px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-50 transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2">
+                    Agendar Consulta Gratis
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                    </svg>
+                </a>
+                <a href="https://calendly.com" target="_blank" class="glass-card text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-white/10 transition-all flex items-center justify-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                    </svg>
+                    Ver Calendario
+                </a>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-6 text-white/70 text-sm">
+                <div class="flex items-center gap-2">
+                    <svg class="w-5 h-5 text-green-300" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                    </svg>
+                    Consulta gratuita
+                </div>
+                <div class="flex items-center gap-2">
+                    <svg class="w-5 h-5 text-green-300" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                    </svg>
+                    Sin compromiso
+                </div>
+                <div class="flex items-center gap-2">
+                    <svg class="w-5 h-5 text-green-300" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                    </svg>
+                    Respuesta en 24h
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-dark-900 text-white pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+                <!-- Company Info -->
+                <div>
+                    <div class="flex items-center space-x-2 mb-6">
+                        <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-accent-500 rounded-xl flex items-center justify-center">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path>
+                            </svg>
+                        </div>
+                        <span class="text-2xl font-bold font-serif">Creative<span class="text-primary-500">Studio</span></span>
+                    </div>
+                    <p class="text-gray-400 mb-6">Creando diseños que inspiran y conectan desde 2016. Especializado en branding, UI/UX y packaging.</p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-primary-600 transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"></path>
+                            </svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-primary-600 transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path>
+                            </svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center hover:bg-primary-600 transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Enlaces</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#portfolio" class="text-gray-400 hover:text-white transition-colors">Portafolio</a></li>
+                        <li><a href="#servicios" class="text-gray-400 hover:text-white transition-colors">Servicios</a></li>
+                        <li><a href="#sobre-mi" class="text-gray-400 hover:text-white transition-colors">Sobre Mí</a></li>
+                        <li><a href="#proceso" class="text-gray-400 hover:text-white transition-colors">Proceso</a></li>
+                        <li><a href="#testimonios" class="text-gray-400 hover:text-white transition-colors">Testimonios</a></li>
+                        <li><a href="#contacto" class="text-gray-400 hover:text-white transition-colors">Contacto</a></li>
+                    </ul>
+                </div>
+
+                <!-- Services -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Servicios</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Branding</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">UI/UX Design</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Packaging</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Ilustración</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Motion Graphics</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Editorial</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-6">Contacto</h4>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <svg class="w-5 h-5 text-primary-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                            </svg>
+                            <span class="text-gray-400">hola@creativestudio.com</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-5 h-5 text-primary-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                            </svg>
+                            <span class="text-gray-400">+52 55 1234 5678</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-5 h-5 text-primary-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                            <span class="text-gray-400">Ciudad de México, México</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom Bar -->
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-gray-500 text-sm">© 2024 CreativeStudio. Todos los derechos reservados.</p>
+                <div class="flex gap-6 text-sm">
+                    <a href="#" class="text-gray-500 hover:text-white transition-colors">Términos de Servicio</a>
+                    <a href="#" class="text-gray-500 hover:text-white transition-colors">Política de Privacidad</a>
+                    <a href="#" class="text-gray-500 hover:text-white transition-colors">Aviso Legal</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Navbar Scroll Effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('shadow-md');
+            } else {
+                navbar.classList.remove('shadow-md');
+            }
+        });
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        // Portfolio Filter
+        function filterPortfolio(category) {
+            const items = document.querySelectorAll('[data-category]');
+            const buttons = document.querySelectorAll('[onclick^="filterPortfolio"]');
+            
+            // Update button styles
+            buttons.forEach(btn => {
+                if (btn.getAttribute('onclick').includes(category)) {
+                    btn.classList.remove('bg-white', 'text-gray-600', 'border-gray-200');
+                    btn.classList.add('bg-primary-600', 'text-white');
+                } else {
+                    btn.classList.add('bg-white', 'text-gray-600', 'border-gray-200');
+                    btn.classList.remove('bg-primary-600', 'text-white');
+                }
+            });
+            
+            // Filter items
+            items.forEach(item => {
+                if (category === 'all' || item.getAttribute('data-category') === category) {
+                    item.style.display = 'block';
+                    setTimeout(() => {
+                        item.style.opacity = '1';
+                        item.style.transform = 'scale(1)';
+                    }, 50);
+                } else {
+                    item.style.opacity = '0';
+                    item.style.transform = 'scale(0.8)';
+                    setTimeout(() => {
+                        item.style.display = 'none';
+                    }, 300);
+                }
+            });
+        }
+
+        // FAQ Toggle
+        function toggleFaq(button) {
+            const answer = button.nextElementSibling;
+            const icon = button.querySelector('.faq-icon');
+            
+            answer.classList.toggle('open');
+            icon.classList.toggle('rotate');
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tienda Online - E-commerce</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script>
+tailwind.config = {
+    theme: {
+        extend: {
+            fontFamily: {
+                'display': ['Poppins', 'sans-serif'],
+                'body': ['Inter', 'sans-serif'],
+            },
+            colors: {
+                'shop': {
+                    'primary': '#6366f1',
+                    'secondary': '#8b5cf6',
+                    'accent': '#f59e0b',
+                    'dark': '#1e1b4b',
+                    'light': '#f5f3ff',
+                    'success': '#10b981',
+                    'danger': '#ef4444',
+                }
+            }
+        }
+    }
+}
+</script>
+<style>
+.hero-gradient { background: linear-gradient(135deg, #1e1b4b 0%, #312e81 50%, #4c1d95 100%); }
+.card-hover { transition: all 0.3s ease; }
+.card-hover:hover { transform: translateY(-6px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+.reveal { opacity: 0; transform: translateY(30px); transition: all 0.7s ease-out; }
+.reveal.active { opacity: 1; transform: translateY(0); }
+.nav-blur { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+.category-card { transition: all 0.3s ease; }
+.category-card:hover { transform: scale(1.05); }
+.product-badge { position: absolute; top: 12px; left: 12px; }
+.wishlist-btn { transition: all 0.2s ease; }
+.wishlist-btn:hover { color: #ef4444; transform: scale(1.1); }
+.wishlist-btn.active { color: #ef4444; }
+.cart-float { animation: float 3s ease-in-out infinite; }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+.countdown-item { background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); }
+.testimonial-slide { transition: all 0.5s ease; }
+.newsletter-bg { background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%); }
+.scrollbar-hide::-webkit-scrollbar { display: none; }
+.scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+.sticky-add { transform: translateY(100%); transition: transform 0.3s ease; }
+.sticky-add.show { transform: translateY(0); }
+</style>
+</head>
+<body class="font-body bg-gray-50 text-gray-800 antialiased">
+
+<!-- Top Bar -->
+<div class="bg-shop-dark text-white py-2 text-sm">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+<div class="hidden sm:flex items-center gap-6">
+<span><i class="fas fa-truck mr-1"></i> Envio gratis en compras +$50</span>
+<span><i class="fas fa-undo mr-1"></i> Devoluciones 30 dias</span>
+</div>
+<div class="flex items-center gap-4 ml-auto">
+<a href="#" class="hover:text-shop-accent transition-colors">Ayuda</a>
+<a href="#" class="hover:text-shop-accent transition-colors">Seguimiento</a>
+<div class="flex items-center gap-2">
+<img src="https://flagcdn.com/w20/mx.png" alt="MX" class="w-5 rounded">
+<span>MXN</span>
+</div>
+</div>
+</div>
+</div>
+
+<!-- Navigation -->
+<nav class="sticky top-0 z-50 nav-blur bg-white/95 border-b border-gray-200" id="navbar">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-16">
+<!-- Logo -->
+<a href="#" class="font-display text-2xl font-bold text-shop-dark flex items-center gap-2">
+<i class="fas fa-shopping-bag text-shop-primary"></i>
+Shop<span class="text-shop-primary">Zone</span>
+</a>
+
+<!-- Search Desktop -->
+<div class="hidden lg:flex flex-1 max-w-xl mx-8">
+<div class="relative w-full">
+<input type="text" placeholder="Buscar productos, marcas, categorias..." class="w-full pl-4 pr-12 py-2.5 rounded-full border border-gray-300 focus:border-shop-primary focus:ring-2 focus:ring-shop-primary/20 outline-none transition-all bg-gray-50">
+<button class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 bg-shop-primary text-white rounded-full flex items-center justify-center hover:bg-shop-secondary transition-colors">
+<i class="fas fa-search text-sm"></i>
+</button>
+</div>
+</div>
+
+<!-- Nav Icons -->
+<div class="flex items-center gap-4">
+<button class="lg:hidden text-gray-600 hover:text-shop-primary">
+<i class="fas fa-search text-xl"></i>
+</button>
+<a href="#" class="hidden sm:flex items-center gap-2 text-gray-600 hover:text-shop-primary transition-colors">
+<i class="far fa-heart text-xl"></i>
+<span class="hidden xl:inline text-sm">Favoritos</span>
+</a>
+<a href="#" class="hidden sm:flex items-center gap-2 text-gray-600 hover:text-shop-primary transition-colors">
+<i class="far fa-user text-xl"></i>
+<span class="hidden xl:inline text-sm">Cuenta</span>
+</a>
+<a href="#" class="flex items-center gap-2 text-gray-600 hover:text-shop-primary transition-colors relative">
+<i class="fas fa-shopping-cart text-xl"></i>
+<span class="hidden xl:inline text-sm">Carrito</span>
+<span class="absolute -top-1 -right-1 w-5 h-5 bg-shop-danger text-white text-xs rounded-full flex items-center justify-center font-bold">3</span>
+</a>
+<button class="lg:hidden text-gray-600 hover:text-shop-primary" id="mobile-menu-btn">
+<i class="fas fa-bars text-xl"></i>
+</button>
+</div>
+</div>
+</div>
+
+<!-- Mobile Menu -->
+<div id="mobile-menu" class="hidden lg:hidden bg-white border-t border-gray-200">
+<div class="px-4 py-4 space-y-3">
+<div class="relative">
+<input type="text" placeholder="Buscar..." class="w-full pl-4 pr-10 py-2 rounded-full border border-gray-300 focus:border-shop-primary outline-none">
+<i class="fas fa-search absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"></i>
+</div>
+<a href="#inicio" class="block py-2 text-gray-700 font-medium hover:text-shop-primary">Inicio</a>
+<a href="#productos" class="block py-2 text-gray-700 font-medium hover:text-shop-primary">Productos</a>
+<a href="#ofertas" class="block py-2 text-gray-700 font-medium hover:text-shop-primary">Ofertas</a>
+<a href="#categorias" class="block py-2 text-gray-700 font-medium hover:text-shop-primary">Categorias</a>
+<a href="#contacto" class="block py-2 text-gray-700 font-medium hover:text-shop-primary">Contacto</a>
+</div>
+</div>
+
+<!-- Category Nav -->
+<div class="hidden lg:block border-b border-gray-200 bg-white">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center gap-8 py-3 text-sm">
+<a href="#" class="flex items-center gap-2 font-semibold text-shop-primary">
+<i class="fas fa-th-large"></i> Todas las Categorias
+</a>
+<a href="#" class="text-gray-600 hover:text-shop-primary transition-colors">Electronica</a>
+<a href="#" class="text-gray-600 hover:text-shop-primary transition-colors">Moda</a>
+<a href="#" class="text-gray-600 hover:text-shop-primary transition-colors">Hogar</a>
+<a href="#" class="text-gray-600 hover:text-shop-primary transition-colors">Deportes</a>
+<a href="#" class="text-gray-600 hover:text-shop-primary transition-colors">Belleza</a>
+<a href="#" class="text-gray-600 hover:text-shop-primary transition-colors">Juguetes</a>
+<a href="#" class="text-gray-600 hover:text-shop-primary transition-colors">Libros</a>
+<a href="#" class="ml-auto text-shop-accent font-semibold flex items-center gap-1">
+<i class="fas fa-fire"></i> Ofertas Flash
+</a>
+</div>
+</div>
+</div>
+</nav>
+
+<!-- Hero Section -->
+<section id="inicio" class="hero-gradient relative overflow-hidden">
+<div class="absolute top-0 right-0 w-96 h-96 bg-shop-primary/20 rounded-full blur-3xl"></div>
+<div class="absolute bottom-0 left-0 w-72 h-72 bg-shop-secondary/20 rounded-full blur-3xl"></div>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 relative z-10">
+<div class="grid lg:grid-cols-2 gap-12 items-center">
+<div class="reveal">
+<div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 text-white/90 text-sm mb-6">
+<i class="fas fa-tag text-shop-accent"></i>
+<span class="font-semibold">Hasta 50% OFF</span>
+<span class="text-white/60">en seleccionados</span>
+</div>
+<h1 class="font-display text-4xl md:text-6xl font-bold text-white leading-tight mb-6">
+Descubre las <span class="text-shop-accent">mejores</span><br>ofertas del mes
+</h1>
+<p class="text-lg text-gray-300 mb-8 max-w-lg">
+Encuentra todo lo que necesitas con precios increibles. Envio gratis en compras mayores a $50 y devoluciones sin complicaciones.
+</p>
+<div class="flex flex-wrap gap-4">
+<a href="#productos" class="bg-white text-shop-dark px-8 py-4 rounded-full font-semibold hover:bg-shop-accent hover:text-white transition-all inline-flex items-center gap-2">
+Ver Productos <i class="fas fa-arrow-right"></i>
+</a>
+<a href="#ofertas" class="border-2 border-white/30 text-white px-8 py-4 rounded-full font-semibold hover:bg-white/10 transition-all">
+Ofertas Flash
+</a>
+</div>
+<div class="mt-10 flex items-center gap-6">
+<div class="flex -space-x-3">
+<img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=40&h=40&fit=crop" class="w-10 h-10 rounded-full border-2 border-shop-dark object-cover" alt="">
+<img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=40&h=40&fit=crop" class="w-10 h-10 rounded-full border-2 border-shop-dark object-cover" alt="">
+<img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=40&h=40&fit=crop" class="w-10 h-10 rounded-full border-2 border-shop-dark object-cover" alt="">
+<img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=40&h=40&fit=crop" class="w-10 h-10 rounded-full border-2 border-shop-dark object-cover" alt="">
+</div>
+<div class="text-white/80 text-sm">
+<div class="font-bold text-white">+10,000 clientes</div>
+<div>confian en nosotros</div>
+</div>
+</div>
+</div>
+<div class="relative reveal">
+<div class="relative">
+<div class="absolute -inset-4 bg-gradient-to-r from-shop-primary to-shop-secondary rounded-3xl blur-2xl opacity-30"></div>
+<img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=600&h=500&fit=crop" alt="Shopping" class="relative rounded-3xl shadow-2xl w-full object-cover">
+<!-- Floating Price Card -->
+<div class="absolute -bottom-4 -left-4 bg-white rounded-2xl p-4 shadow-xl">
+<div class="flex items-center gap-3">
+<img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=60&h=60&fit=crop" class="w-14 h-14 rounded-xl object-cover" alt="">
+<div>
+<div class="text-xs text-gray-500">Auriculares Pro</div>
+<div class="font-bold text-shop-dark">$89.99</div>
+<div class="text-xs text-shop-success"><i class="fas fa-arrow-down"></i> 40% OFF</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Features Bar -->
+<section class="bg-white border-b border-gray-200">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-6">
+<div class="flex items-center gap-4 reveal">
+<div class="w-12 h-12 bg-shop-light rounded-xl flex items-center justify-center flex-shrink-0">
+<i class="fas fa-truck text-shop-primary text-xl"></i>
+</div>
+<div>
+<div class="font-semibold text-shop-dark text-sm">Envio Gratis</div>
+<div class="text-xs text-gray-500">En compras +$50</div>
+</div>
+</div>
+<div class="flex items-center gap-4 reveal">
+<div class="w-12 h-12 bg-shop-light rounded-xl flex items-center justify-center flex-shrink-0">
+<i class="fas fa-shield-alt text-shop-primary text-xl"></i>
+</div>
+<div>
+<div class="font-semibold text-shop-dark text-sm">Pago Seguro</div>
+<div class="text-xs text-gray-500">100% protegido</div>
+</div>
+</div>
+<div class="flex items-center gap-4 reveal">
+<div class="w-12 h-12 bg-shop-light rounded-xl flex items-center justify-center flex-shrink-0">
+<i class="fas fa-undo text-shop-primary text-xl"></i>
+</div>
+<div>
+<div class="font-semibold text-shop-dark text-sm">Devoluciones</div>
+<div class="text-xs text-gray-500">30 dias sin preguntas</div>
+</div>
+</div>
+<div class="flex items-center gap-4 reveal">
+<div class="w-12 h-12 bg-shop-light rounded-xl flex items-center justify-center flex-shrink-0">
+<i class="fas fa-headset text-shop-primary text-xl"></i>
+</div>
+<div>
+<div class="font-semibold text-shop-dark text-sm">Soporte 24/7</div>
+<div class="text-xs text-gray-500">Siempre disponible</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Categories -->
+<section id="categorias" class="py-16 bg-gray-50">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center mb-12 reveal">
+<h2 class="font-display text-3xl md:text-4xl font-bold text-shop-dark mb-3">
+Explora por <span class="text-shop-primary">Categoria</span>
+</h2>
+<p class="text-gray-500">Encuentra exactamente lo que buscas</p>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+<div class="category-card bg-white rounded-2xl p-6 text-center shadow-sm hover:shadow-lg cursor-pointer reveal">
+<div class="w-16 h-16 mx-auto mb-3 bg-blue-100 rounded-2xl flex items-center justify-center">
+<i class="fas fa-laptop text-blue-600 text-2xl"></i>
+</div>
+<div class="font-semibold text-shop-dark text-sm">Electronica</div>
+<div class="text-xs text-gray-400 mt-1">240 productos</div>
+</div>
+<div class="category-card bg-white rounded-2xl p-6 text-center shadow-sm hover:shadow-lg cursor-pointer reveal">
+<div class="w-16 h-16 mx-auto mb-3 bg-pink-100 rounded-2xl flex items-center justify-center">
+<i class="fas fa-tshirt text-pink-600 text-2xl"></i>
+</div>
+<div class="font-semibold text-shop-dark text-sm">Moda</div>
+<div class="text-xs text-gray-400 mt-1">512 productos</div>
+</div>
+<div class="category-card bg-white rounded-2xl p-6 text-center shadow-sm hover:shadow-lg cursor-pointer reveal">
+<div class="w-16 h-16 mx-auto mb-3 bg-green-100 rounded-2xl flex items-center justify-center">
+<i class="fas fa-couch text-green-600 text-2xl"></i>
+</div>
+<div class="font-semibold text-shop-dark text-sm">Hogar</div>
+<div class="text-xs text-gray-400 mt-1">189 productos</div>
+</div>
+<div class="category-card bg-white rounded-2xl p-6 text-center shadow-sm hover:shadow-lg cursor-pointer reveal">
+<div class="w-16 h-16 mx-auto mb-3 bg-orange-100 rounded-2xl flex items-center justify-center">
+<i class="fas fa-dumbbell text-orange-600 text-2xl"></i>
+</div>
+<div class="font-semibold text-shop-dark text-sm">Deportes</div>
+<div class="text-xs text-gray-400 mt-1">156 productos</div>
+</div>
+<div class="category-card bg-white rounded-2xl p-6 text-center shadow-sm hover:shadow-lg cursor-pointer reveal">
+<div class="w-16 h-16 mx-auto mb-3 bg-purple-100 rounded-2xl flex items-center justify-center">
+<i class="fas fa-spa text-purple-600 text-2xl"></i>
+</div>
+<div class="font-semibold text-shop-dark text-sm">Belleza</div>
+<div class="text-xs text-gray-400 mt-1">324 productos</div>
+</div>
+<div class="category-card bg-white rounded-2xl p-6 text-center shadow-sm hover:shadow-lg cursor-pointer reveal">
+<div class="w-16 h-16 mx-auto mb-3 bg-yellow-100 rounded-2xl flex items-center justify-center">
+<i class="fas fa-gamepad text-yellow-600 text-2xl"></i>
+</div>
+<div class="font-semibold text-shop-dark text-sm">Juguetes</div>
+<div class="text-xs text-gray-400 mt-1">98 productos</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Flash Sale -->
+<section id="ofertas" class="py-16 bg-shop-dark relative overflow-hidden">
+<div class="absolute top-0 right-0 w-96 h-96 bg-shop-primary/20 rounded-full blur-3xl"></div>
+<div class="absolute bottom-0 left-0 w-72 h-72 bg-shop-secondary/20 rounded-full blur-3xl"></div>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+<div class="flex flex-col lg:flex-row items-center justify-between gap-8 mb-12 reveal">
+<div class="text-center lg:text-left">
+<div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-shop-accent/20 text-shop-accent text-sm font-semibold mb-4">
+<i class="fas fa-bolt"></i> Oferta Flash
+</div>
+<h2 class="font-display text-3xl md:text-4xl font-bold text-white mb-2">
+Ofertas por tiempo limitado
+</h2>
+<p class="text-gray-400">Aprovecha antes de que terminen</p>
+</div>
+<div class="flex items-center gap-3">
+<div class="countdown-item rounded-xl px-4 py-3 text-center min-w-[70px]">
+<div class="text-2xl font-bold text-white" id="hours">04</div>
+<div class="text-xs text-gray-400">Horas</div>
+</div>
+<div class="text-white text-2xl font-bold">:</div>
+<div class="countdown-item rounded-xl px-4 py-3 text-center min-w-[70px]">
+<div class="text-2xl font-bold text-white" id="minutes">32</div>
+<div class="text-xs text-gray-400">Min</div>
+</div>
+<div class="text-white text-2xl font-bold">:</div>
+<div class="countdown-item rounded-xl px-4 py-3 text-center min-w-[70px]">
+<div class="text-2xl font-bold text-white" id="seconds">15</div>
+<div class="text-xs text-gray-400">Seg</div>
+</div>
+</div>
+</div>
+
+<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Flash Product 1 -->
+<div class="card-hover bg-white rounded-2xl overflow-hidden shadow-lg reveal">
+<div class="relative">
+<img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=300&fit=crop" alt="Product" class="w-full h-48 object-cover">
+<div class="product-badge bg-shop-danger text-white text-xs font-bold px-3 py-1 rounded-full">-40%</div>
+<button class="wishlist-btn absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md">
+<i class="far fa-heart"></i>
+</button>
+</div>
+<div class="p-4">
+<div class="text-xs text-gray-400 mb-1">Electronica</div>
+<h3 class="font-semibold text-shop-dark mb-2">Auriculares Bluetooth Pro</h3>
+<div class="flex items-center gap-2 mb-3">
+<div class="flex text-yellow-400 text-xs">
+<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+</div>
+<span class="text-xs text-gray-400">(128)</span>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<span class="text-lg font-bold text-shop-primary">$89.99</span>
+<span class="text-sm text-gray-400 line-through ml-1">$149.99</span>
+</div>
+<button class="w-10 h-10 bg-shop-primary text-white rounded-full flex items-center justify-center hover:bg-shop-secondary transition-colors">
+<i class="fas fa-plus"></i>
+</button>
+</div>
+<div class="mt-3">
+<div class="h-1.5 bg-gray-200 rounded-full overflow-hidden">
+<div class="h-full bg-shop-danger rounded-full" style="width: 75%"></div>
+</div>
+<div class="text-xs text-gray-500 mt-1">75% vendido - Quedan 12 unidades</div>
+</div>
+</div>
+</div>
+
+<!-- Flash Product 2 -->
+<div class="card-hover bg-white rounded-2xl overflow-hidden shadow-lg reveal">
+<div class="relative">
+<img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=300&fit=crop" alt="Product" class="w-full h-48 object-cover">
+<div class="product-badge bg-shop-danger text-white text-xs font-bold px-3 py-1 rounded-full">-35%</div>
+<button class="wishlist-btn absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md">
+<i class="far fa-heart"></i>
+</button>
+</div>
+<div class="p-4">
+<div class="text-xs text-gray-400 mb-1">Electronica</div>
+<h3 class="font-semibold text-shop-dark mb-2">Smart Watch Series 5</h3>
+<div class="flex items-center gap-2 mb-3">
+<div class="flex text-yellow-400 text-xs">
+<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+</div>
+<span class="text-xs text-gray-400">(256)</span>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<span class="text-lg font-bold text-shop-primary">$129.99</span>
+<span class="text-sm text-gray-400 line-through ml-1">$199.99</span>
+</div>
+<button class="w-10 h-10 bg-shop-primary text-white rounded-full flex items-center justify-center hover:bg-shop-secondary transition-colors">
+<i class="fas fa-plus"></i>
+</button>
+</div>
+<div class="mt-3">
+<div class="h-1.5 bg-gray-200 rounded-full overflow-hidden">
+<div class="h-full bg-shop-danger rounded-full" style="width: 60%"></div>
+</div>
+<div class="text-xs text-gray-500 mt-1">60% vendido - Quedan 24 unidades</div>
+</div>
+</div>
+</div>
+
+<!-- Flash Product 3 -->
+<div class="card-hover bg-white rounded-2xl overflow-hidden shadow-lg reveal">
+<div class="relative">
+<img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=300&fit=crop" alt="Product" class="w-full h-48 object-cover">
+<div class="product-badge bg-shop-danger text-white text-xs font-bold px-3 py-1 rounded-full">-50%</div>
+<button class="wishlist-btn absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md">
+<i class="far fa-heart"></i>
+</button>
+</div>
+<div class="p-4">
+<div class="text-xs text-gray-400 mb-1">Moda</div>
+<h3 class="font-semibold text-shop-dark mb-2">Zapatillas Deportivas Air</h3>
+<div class="flex items-center gap-2 mb-3">
+<div class="flex text-yellow-400 text-xs">
+<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+</div>
+<span class="text-xs text-gray-400">(89)</span>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<span class="text-lg font-bold text-shop-primary">$59.99</span>
+<span class="text-sm text-gray-400 line-through ml-1">$119.99</span>
+</div>
+<button class="w-10 h-10 bg-shop-primary text-white rounded-full flex items-center justify-center hover:bg-shop-secondary transition-colors">
+<i class="fas fa-plus"></i>
+</button>
+</div>
+<div class="mt-3">
+<div class="h-1.5 bg-gray-200 rounded-full overflow-hidden">
+<div class="h-full bg-shop-danger rounded-full" style="width: 90%"></div>
+</div>
+<div class="text-xs text-gray-500 mt-1">90% vendido - Quedan 5 unidades</div>
+</div>
+</div>
+</div>
+
+<!-- Flash Product 4 -->
+<div class="card-hover bg-white rounded-2xl overflow-hidden shadow-lg reveal">
+<div class="relative">
+<img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=400&h=300&fit=crop" alt="Product" class="w-full h-48 object-cover">
+<div class="product-badge bg-shop-danger text-white text-xs font-bold px-3 py-1 rounded-full">-25%</div>
+<button class="wishlist-btn absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md">
+<i class="far fa-heart"></i>
+</button>
+</div>
+<div class="p-4">
+<div class="text-xs text-gray-400 mb-1">Electronica</div>
+<h3 class="font-semibold text-shop-dark mb-2">Camara Instax Mini</h3>
+<div class="flex items-center gap-2 mb-3">
+<div class="flex text-yellow-400 text-xs">
+<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+</div>
+<span class="text-xs text-gray-400">(167)</span>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<span class="text-lg font-bold text-shop-primary">$74.99</span>
+<span class="text-sm text-gray-400 line-through ml-1">$99.99</span>
+</div>
+<button class="w-10 h-10 bg-shop-primary text-white rounded-full flex items-center justify-center hover:bg-shop-secondary transition-colors">
+<i class="fas fa-plus"></i>
+</button>
+</div>
+<div class="mt-3">
+<div class="h-1.5 bg-gray-200 rounded-full overflow-hidden">
+<div class="h-full bg-shop-danger rounded-full" style="width: 45%"></div>
+</div>
+<div class="text-xs text-gray-500 mt-1">45% vendido - Quedan 38 unidades</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Featured Products -->
+<section id="productos" class="py-16 bg-white">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex flex-col sm:flex-row items-center justify-between mb-12 reveal">
+<div class="text-center sm:text-left mb-4 sm:mb-0">
+<h2 class="font-display text-3xl md:text-4xl font-bold text-shop-dark mb-2">
+Productos <span class="text-shop-primary">Destacados</span>
+</h2>
+<p class="text-gray-500">Los mas vendidos esta semana</p>
+</div>
+<div class="flex gap-2">
+<button class="px-4 py-2 rounded-full bg-shop-primary text-white text-sm font-medium">Todos</button>
+<button class="px-4 py-2 rounded-full border border-gray-200 text-gray-600 text-sm font-medium hover:border-shop-primary hover:text-shop-primary transition-colors">Nuevos</button>
+<button class="px-4 py-2 rounded-full border border-gray-200 text-gray-600 text-sm font-medium hover:border-shop-primary hover:text-shop-primary transition-colors">Populares</button>
+</div>
+</div>
+
+<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Product 1 -->
+<div class="card-hover bg-white rounded-2xl overflow-hidden border border-gray-100 reveal">
+<div class="relative">
+<img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=400&h=300&fit=crop" alt="Product" class="w-full h-52 object-cover">
+<div class="product-badge bg-shop-success text-white text-xs font-bold px-3 py-1 rounded-full">Nuevo</div>
+<button class="wishlist-btn absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md">
+<i class="far fa-heart"></i>
+</button>
+</div>
+<div class="p-4">
+<div class="text-xs text-gray-400 mb-1">Electronica</div>
+<h3 class="font-semibold text-shop-dark mb-2">Smartwatch Fitness Pro</h3>
+<div class="flex items-center gap-2 mb-3">
+<div class="flex text-yellow-400 text-xs">
+<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+</div>
+<span class="text-xs text-gray-400">(342)</span>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<span class="text-xl font-bold text-shop-primary">$199.99</span>
+</div>
+<button class="w-10 h-10 bg-shop-primary text-white rounded-full flex items-center justify-center hover:bg-shop-secondary transition-colors">
+<i class="fas fa-plus"></i>
+</button>
+</div>
+</div>
+</div>
+
+<!-- Product 2 -->
+<div class="card-hover bg-white rounded-2xl overflow-hidden border border-gray-100 reveal">
+<div class="relative">
+<img src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=400&h=300&fit=crop" alt="Product" class="w-full h-52 object-cover">
+<button class="wishlist-btn absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md">
+<i class="far fa-heart"></i>
+</button>
+</div>
+<div class="p-4">
+<div class="text-xs text-gray-400 mb-1">Moda</div>
+<h3 class="font-semibold text-shop-dark mb-2">Gafas de Sol UV400</h3>
+<div class="flex items-center gap-2 mb-3">
+<div class="flex text-yellow-400 text-xs">
+<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+</div>
+<span class="text-xs text-gray-400">(198)</span>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<span class="text-xl font-bold text-shop-primary">$45.99</span>
+</div>
+<button class="w-10 h-10 bg-shop-primary text-white rounded-full flex items-center justify-center hover:bg-shop-secondary transition-colors">
+<i class="fas fa-plus"></i>
+</button>
+</div>
+</div>
+</div>
+
+<!-- Product 3 -->
+<div class="card-hover bg-white rounded-2xl overflow-hidden border border-gray-100 reveal">
+<div class="relative">
+<img src="https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=400&h=300&fit=crop" alt="Product" class="w-full h-52 object-cover">
+<div class="product-badge bg-shop-accent text-white text-xs font-bold px-3 py-1 rounded-full">Popular</div>
+<button class="wishlist-btn absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md">
+<i class="far fa-heart"></i>
+</button>
+</div>
+<div class="p-4">
+<div class="text-xs text-gray-400 mb-1">Hogar</div>
+<h3 class="font-semibold text-shop-dark mb-2">Lampara LED Minimalista</h3>
+<div class="flex items-center gap-2 mb-3">
+<div class="flex text-yellow-400 text-xs">
+<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+</div>
+<span class="text-xs text-gray-400">(412)</span>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<span class="text-xl font-bold text-shop-primary">$34.99</span>
+</div>
+<button class="w-10 h-10 bg-shop-primary text-white rounded-full flex items-center justify-center hover:bg-shop-secondary transition-colors">
+<i class="fas fa-plus"></i>
+</button>
+</div>
+</div>
+</div>
+
+<!-- Product 4 -->
+<div class="card-hover bg-white rounded-2xl overflow-hidden border border-gray-100 reveal">
+<div class="relative">
+<img src="https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=400&h=300&fit=crop" alt="Product" class="w-full h-52 object-cover">
+<button class="wishlist-btn absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md">
+<i class="far fa-heart"></i>
+</button>
+</div>
+<div class="p-4">
+<div class="text-xs text-gray-400 mb-1">Deportes</div>
+<h3 class="font-semibold text-shop-dark mb-2">Botella Termica 1L</h3>
+<div class="flex items-center gap-2 mb-3">
+<div class="flex text-yellow-400 text-xs">
+<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+</div>
+<span class="text-xs text-gray-400">(76)</span>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<span class="text-xl font-bold text-shop-primary">$24.99</span>
+</div>
+<button class="w-10 h-10 bg-shop-primary text-white rounded-full flex items-center justify-center hover:bg-shop-secondary transition-colors">
+<i class="fas fa-plus"></i>
+</button>
+</div>
+</div>
+</div>
+
+<!-- Product 5 -->
+<div class="card-hover bg-white rounded-2xl overflow-hidden border border-gray-100 reveal">
+<div class="relative">
+<img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?w=400&h=300&fit=crop" alt="Product" class="w-full h-52 object-cover">
+<div class="product-badge bg-shop-success text-white text-xs font-bold px-3 py-1 rounded-full">Nuevo</div>
+<button class="wishlist-btn absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md">
+<i class="far fa-heart"></i>
+</button>
+</div>
+<div class="p-4">
+<div class="text-xs text-gray-400 mb-1">Electronica</div>
+<h3 class="font-semibold text-shop-dark mb-2">Camara Polaroid</h3>
+<div class="flex items-center gap-2 mb-3">
+<div class="flex text-yellow-400 text-xs">
+<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+</div>
+<span class="text-xs text-gray-400">(234)</span>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<span class="text-xl font-bold text-shop-primary">$89.99</span>
+</div>
+<button class="w-10 h-10 bg-shop-primary text-white rounded-full flex items-center justify-center hover:bg-shop-secondary transition-colors">
+<i class="fas fa-plus"></i>
+</button>
+</div>
+</div>
+</div>
+
+<!-- Product 6 -->
+<div class="card-hover bg-white rounded-2xl overflow-hidden border border-gray-100 reveal">
+<div class="relative">
+<img src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=400&h=300&fit=crop" alt="Product" class="w-full h-52 object-cover">
+<button class="wishlist-btn absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md">
+<i class="far fa-heart"></i>
+</button>
+</div>
+<div class="p-4">
+<div class="text-xs text-gray-400 mb-1">Moda</div>
+<h3 class="font-semibold text-shop-dark mb-2">Mochila Urbana Premium</h3>
+<div class="flex items-center gap-2 mb-3">
+<div class="flex text-yellow-400 text-xs">
+<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+</div>
+<span class="text-xs text-gray-400">(567)</span>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<span class="text-xl font-bold text-shop-primary">$54.99</span>
+</div>
+<button class="w-10 h-10 bg-shop-primary text-white rounded-full flex items-center justify-center hover:bg-shop-secondary transition-colors">
+<i class="fas fa-plus"></i>
+</button>
+</div>
+</div>
+</div>
+
+<!-- Product 7 -->
+<div class="card-hover bg-white rounded-2xl overflow-hidden border border-gray-100 reveal">
+<div class="relative">
+<img src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=400&h=300&fit=crop" alt="Product" class="w-full h-52 object-cover">
+<div class="product-badge bg-shop-accent text-white text-xs font-bold px-3 py-1 rounded-full">Popular</div>
+<button class="wishlist-btn absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md">
+<i class="far fa-heart"></i>
+</button>
+</div>
+<div class="p-4">
+<div class="text-xs text-gray-400 mb-1">Belleza</div>
+<h3 class="font-semibold text-shop-dark mb-2">Set Skincare Organico</h3>
+<div class="flex items-center gap-2 mb-3">
+<div class="flex text-yellow-400 text-xs">
+<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+</div>
+<span class="text-xs text-gray-400">(890)</span>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<span class="text-xl font-bold text-shop-primary">$67.99</span>
+</div>
+<button class="w-10 h-10 bg-shop-primary text-white rounded-full flex items-center justify-center hover:bg-shop-secondary transition-colors">
+<i class="fas fa-plus"></i>
+</button>
+</div>
+</div>
+</div>
+
+<!-- Product 8 -->
+<div class="card-hover bg-white rounded-2xl overflow-hidden border border-gray-100 reveal">
+<div class="relative">
+<img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?w=400&h=300&fit=crop" alt="Product" class="w-full h-52 object-cover">
+<button class="wishlist-btn absolute top-3 right-3 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-md">
+<i class="far fa-heart"></i>
+</button>
+</div>
+<div class="p-4">
+<div class="text-xs text-gray-400 mb-1">Hogar</div>
+<h3 class="font-semibold text-shop-dark mb-2">Organizador Escritorio</h3>
+<div class="flex items-center gap-2 mb-3">
+<div class="flex text-yellow-400 text-xs">
+<i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+</div>
+<span class="text-xs text-gray-400">(145)</span>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<span class="text-xl font-bold text-shop-primary">$29.99</span>
+</div>
+<button class="w-10 h-10 bg-shop-primary text-white rounded-full flex items-center justify-center hover:bg-shop-secondary transition-colors">
+<i class="fas fa-plus"></i>
+</button>
+</div>
+</div>
+</div>
+</div>
+
+<div class="text-center mt-12">
+<a href="#" class="inline-flex items-center gap-2 px-8 py-4 rounded-full border-2 border-shop-primary text-shop-primary font-semibold hover:bg-shop-primary hover:text-white transition-all">
+Ver Todos los Productos <i class="fas fa-arrow-right"></i>
+</a>
+</div>
+</div>
+</section>
+
+<!-- Banner Promo -->
+<section class="py-8">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="relative rounded-3xl overflow-hidden reveal">
+<img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1200&h=400&fit=crop" alt="Promo" class="w-full h-64 md:h-80 object-cover">
+<div class="absolute inset-0 bg-gradient-to-r from-shop-dark/90 to-transparent flex items-center">
+<div class="px-8 md:px-16 max-w-lg">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-shop-accent/20 text-shop-accent text-xs font-semibold mb-4">
+<i class="fas fa-percentage"></i> Coleccion Nueva
+</div>
+<h2 class="font-display text-3xl md:text-4xl font-bold text-white mb-4">
+Moda Primavera 2026
+</h2>
+<p class="text-gray-300 mb-6">
+Descubre las ultimas tendencias en ropa, accesorios y calzado. Hasta 30% de descuento en la nueva coleccion.
+</p>
+<a href="#" class="inline-flex items-center gap-2 bg-white text-shop-dark px-6 py-3 rounded-full font-semibold hover:bg-shop-accent hover:text-white transition-all">
+Explorar Coleccion <i class="fas fa-arrow-right"></i>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Brands -->
+<section class="py-12 bg-white border-y border-gray-200">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center mb-8 reveal">
+<p class="text-gray-500 text-sm uppercase tracking-wider font-medium">Marcas que confian en nosotros</p>
+</div>
+<div class="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-60">
+<div class="flex items-center gap-2 text-2xl font-bold text-gray-400 hover:text-shop-primary transition-colors cursor-pointer reveal">
+<i class="fab fa-apple"></i> <span class="hidden sm:inline">Apple</span>
+</div>
+<div class="flex items-center gap-2 text-2xl font-bold text-gray-400 hover:text-shop-primary transition-colors cursor-pointer reveal">
+<i class="fab fa-nike"></i> <span class="hidden sm:inline">Nike</span>
+</div>
+<div class="flex items-center gap-2 text-2xl font-bold text-gray-400 hover:text-shop-primary transition-colors cursor-pointer reveal">
+<i class="fab fa-adidas"></i> <span class="hidden sm:inline">Adidas</span>
+</div>
+<div class="flex items-center gap-2 text-2xl font-bold text-gray-400 hover:text-shop-primary transition-colors cursor-pointer reveal">
+<i class="fab fa-sony"></i> <span class="hidden sm:inline">Sony</span>
+</div>
+<div class="flex items-center gap-2 text-2xl font-bold text-gray-400 hover:text-shop-primary transition-colors cursor-pointer reveal">
+<i class="fas fa-cube"></i> <span class="hidden sm:inline">Samsung</span>
+</div>
+<div class="flex items-center gap-2 text-2xl font-bold text-gray-400 hover:text-shop-primary transition-colors cursor-pointer reveal">
+<i class="fab fa-microsoft"></i> <span class="hidden sm:inline">Microsoft</span>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Testimonials -->
+<section class="py-16 bg-gray-50">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="text-center mb-12 reveal">
+<h2 class="font-display text-3xl md:text-4xl font-bold text-shop-dark mb-3">
+Lo que dicen nuestros <span class="text-shop-primary">clientes</span>
+</h2>
+<p class="text-gray-500">Miles de compradores satisfechos</p>
+</div>
+<div class="grid md:grid-cols-3 gap-8">
+<div class="bg-white rounded-2xl p-8 shadow-sm reveal">
+<div class="flex items-center gap-1 mb-4">
+<i class="fas fa-star text-yellow-400"></i><i class="fas fa-star text-yellow-400"></i><i class="fas fa-star text-yellow-400"></i><i class="fas fa-star text-yellow-400"></i><i class="fas fa-star text-yellow-400"></i>
+</div>
+<p class="text-gray-600 mb-6 leading-relaxed">"Excelente servicio y productos de calidad. El envio fue rapidisimo y todo llego perfecto. Definitivamente volvere a comprar."</p>
+<div class="flex items-center gap-4">
+<img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=50&h=50&fit=crop" class="w-12 h-12 rounded-full object-cover" alt="">
+<div>
+<div class="font-semibold text-shop-dark">Maria Garcia</div>
+<div class="text-sm text-gray-500">Compradora frecuente</div>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-2xl p-8 shadow-sm reveal">
+<div class="flex items-center gap-1 mb-4">
+<i class="fas fa-star text-yellow-400"></i><i class="fas fa-star text-yellow-400"></i><i class="fas fa-star text-yellow-400"></i><i class="fas fa-star text-yellow-400"></i><i class="fas fa-star text-yellow-400"></i>
+</div>
+<p class="text-gray-600 mb-6 leading-relaxed">"La mejor tienda online que he probado. Los precios son competitivos y el soporte al cliente es excepcional. Muy recomendado."</p>
+<div class="flex items-center gap-4">
+<img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=50&h=50&fit=crop" class="w-12 h-12 rounded-full object-cover" alt="">
+<div>
+<div class="font-semibold text-shop-dark">Juan Perez</div>
+<div class="text-sm text-gray-500">Cliente desde 2024</div>
+</div>
+</div>
+</div>
+<div class="bg-white rounded-2xl p-8 shadow-sm reveal">
+<div class="flex items-center gap-1 mb-4">
+<i class="fas fa-star text-yellow-400"></i><i class="fas fa-star text-yellow-400"></i><i class="fas fa-star text-yellow-400"></i><i class="fas fa-star text-yellow-400"></i><i class="fas fa-star-half-alt text-yellow-400"></i>
+</div>
+<p class="text-gray-600 mb-6 leading-relaxed">"Las ofertas flash son increibles. Me ahorre mucho dinero en productos de electronica. La pagina es muy facil de usar."</p>
+<div class="flex items-center gap-4">
+<img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=50&h=50&fit=crop" class="w-12 h-12 rounded-full object-cover" alt="">
+<div>
+<div class="font-semibold text-shop-dark">Laura Martinez</div>
+<div class="text-sm text-gray-500">Tech enthusiast</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- Newsletter -->
+<section class="newsletter-bg py-16">
+<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center reveal">
+<div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 text-white text-sm font-semibold mb-6">
+<i class="fas fa-gift"></i> Unete y ahorra
+</div>
+<h2 class="font-display text-3xl md:text-4xl font-bold text-white mb-4">
+Suscribete y obten 15% de descuento
+</h2>
+<p class="text-white/80 mb-8 max-w-lg mx-auto">
+Recibe ofertas exclusivas, lanzamientos anticipados y consejos de compra directamente en tu correo.
+</p>
+<form class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+<input type="email" placeholder="tu@email.com" class="flex-1 px-6 py-4 rounded-full border-0 outline-none focus:ring-2 focus:ring-white/50 text-gray-800">
+<button type="submit" class="px-8 py-4 bg-shop-dark text-white rounded-full font-semibold hover:bg-white hover:text-shop-dark transition-all whitespace-nowrap">
+Suscribirme <i class="fas fa-paper-plane ml-1"></i>
+</button>
+</form>
+<div class="mt-6 text-white/60 text-sm">
+<i class="fas fa-lock mr-1"></i> No enviamos spam. Puedes darte de baja en cualquier momento.
+</div>
+</div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-shop-dark text-white pt-16 pb-8">
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<div class="grid md:grid-cols-2 lg:grid-cols-5 gap-12 mb-12">
+<div class="lg:col-span-2">
+<a href="#" class="font-display text-2xl font-bold flex items-center gap-2 mb-4">
+<i class="fas fa-shopping-bag text-shop-primary"></i>
+Shop<span class="text-shop-primary">Zone</span>
+</a>
+<p class="text-gray-400 mb-6 max-w-sm">
+Tu tienda online de confianza con miles de productos de calidad, precios competitivos y envio rapido a todo el pais.
+</p>
+<div class="flex gap-3">
+<a href="#" class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-shop-primary transition-colors"><i class="fab fa-facebook-f"></i></a>
+<a href="#" class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-shop-primary transition-colors"><i class="fab fa-instagram"></i></a>
+<a href="#" class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-shop-primary transition-colors"><i class="fab fa-twitter"></i></a>
+<a href="#" class="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-shop-primary transition-colors"><i class="fab fa-youtube"></i></a>
+</div>
+</div>
+<div>
+<h4 class="font-bold text-lg mb-4">Comprar</h4>
+<ul class="space-y-3">
+<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Nuevos Productos</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Ofertas Flash</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Mas Vendidos</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Categorias</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Marcas</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-lg mb-4">Ayuda</h4>
+<ul class="space-y-3">
+<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Centro de Ayuda</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Seguimiento</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Devoluciones</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Envios</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition-colors">Contacto</a></li>
+</ul>
+</div>
+<div>
+<h4 class="font-bold text-lg mb-4">Contacto</h4>
+<ul class="space-y-3">
+<li class="flex items-start gap-3 text-gray-400">
+<i class="fas fa-map-marker-alt mt-1 text-shop-primary"></i>
+<span>Av. Reforma 123, CDMX, Mexico</span>
+</li>
+<li class="flex items-center gap-3 text-gray-400">
+<i class="fas fa-phone text-shop-primary"></i>
+<span>+52 55 1234 5678</span>
+</li>
+<li class="flex items-center gap-3 text-gray-400">
+<i class="fas fa-envelope text-shop-primary"></i>
+<span>hola@shopzone.com</span>
+</li>
+<li class="flex items-center gap-3 text-gray-400">
+<i class="fas fa-clock text-shop-primary"></i>
+<span>Lun - Dom: 9am - 9pm</span>
+</li>
+</ul>
+</div>
+</div>
+<div class="border-t border-white/10 pt-8">
+<div class="flex flex-col md:flex-row justify-between items-center gap-4">
+<div class="text-gray-400 text-sm">
+2026 ShopZone. Todos los derechos reservados.
+</div>
+<div class="flex items-center gap-4">
+<img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" class="h-6 opacity-60" alt="Visa">
+<img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" class="h-6 opacity-60" alt="Mastercard">
+<img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" class="h-6 opacity-60" alt="PayPal">
+<img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/American_Express_logo_%282018%29.svg" class="h-6 opacity-60" alt="Amex">
+</div>
+<div class="flex gap-6 text-sm">
+<a href="#" class="text-gray-400 hover:text-white transition-colors">Privacidad</a>
+<a href="#" class="text-gray-400 hover:text-white transition-colors">Terminos</a>
+<a href="#" class="text-gray-400 hover:text-white transition-colors">Cookies</a>
+</div>
+</div>
+</div>
+</div>
+</footer>
+
+<!-- Sticky Cart Bar (Mobile) -->
+<div class="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 lg:hidden z-40 sticky-add" id="sticky-cart">
+<div class="flex items-center justify-between max-w-lg mx-auto">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 bg-shop-light rounded-xl flex items-center justify-center">
+<i class="fas fa-shopping-cart text-shop-primary"></i>
+</div>
+<div>
+<div class="font-semibold text-shop-dark text-sm">3 productos</div>
+<div class="text-shop-primary font-bold">$324.97</div>
+</div>
+</div>
+<button class="px-6 py-3 bg-shop-primary text-white rounded-full font-semibold text-sm hover:bg-shop-secondary transition-colors">
+Ver Carrito
+</button>
+</div>
+</div>
+
+<script>
+// Mobile Menu
+const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+const mobileMenu = document.getElementById('mobile-menu');
+mobileMenuBtn.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
+
+// Scroll Reveal
+const revealElements = document.querySelectorAll('.reveal');
+const revealObserver = new IntersectionObserver((entries) => {
+entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('active'); } });
+}, { threshold: 0.1 });
+revealElements.forEach(el => revealObserver.observe(el));
+
+// Countdown Timer
+function updateCountdown() {
+const now = new Date();
+const endOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59);
+let diff = endOfDay - now;
+if (diff < 0) diff = 24 * 60 * 60 * 1000;
+const h = Math.floor(diff / (1000 * 60 * 60));
+const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+const s = Math.floor((diff % (1000 * 60)) / 1000);
+document.getElementById('hours').textContent = String(h).padStart(2, '0');
+document.getElementById('minutes').textContent = String(m).padStart(2, '0');
+document.getElementById('seconds').textContent = String(s).padStart(2, '0');
+}
+setInterval(updateCountdown, 1000);
+updateCountdown();
+
+// Wishlist Toggle
+document.querySelectorAll('.wishlist-btn').forEach(btn => {
+btn.addEventListener('click', (e) => {
+e.preventDefault();
+btn.classList.toggle('active');
+const icon = btn.querySelector('i');
+if (btn.classList.contains('active')) {
+icon.classList.remove('far');
+icon.classList.add('fas');
+} else {
+icon.classList.remove('fas');
+icon.classList.add('far');
+}
+});
+});
+
+// Sticky Cart (show after scroll)
+const stickyCart = document.getElementById('sticky-cart');
+window.addEventListener('scroll', () => {
+if (window.scrollY > 500) {
+stickyCart.classList.add('show');
+} else {
+stickyCart.classList.remove('show');
+}
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "name": "smartstart-marketplace",
+  "version": "3.0.0",
+  "description": "Marketplace profesional de plantillas web premium",
+  "main": "src/index.html",
+  "scripts": {
+    "start": "npx serve src/",
+    "validate": "node scripts/validate.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/williaml1223/smartstart-marketplace.git"
+  },
+  "author": "William <williaml1223@github.com>",
+  "license": "MIT"
+}
