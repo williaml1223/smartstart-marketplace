@@ -1,0 +1,59 @@
+
+@media(max-width:983px){
+
+    body{
+    
+    }
+header{
+   margin: 0 20px;
+}
+
+ .card-name{
+        display:none;
+    }
+
+.cart-trigger{
+    font-size:1.5rem;
+}
+.filter-mobile-btn:hover, .filter-mobile-btn.active {
+	border-color: var(--neon-purple);
+	color: var(--text-main);
+	background: var(--neon-purple-soft);
+	box-shadow: 0 0 15px var(--neon-purple-glow);
+}
+
+/* --- MODIFICACIONES EN MEDIA QUERIES (max-width: 768px) --- */
+@media (max-width: 768px) {
+	/* Mostrar el botón de filtros en móviles */
+	.filter-mobile-btn {
+		display: flex;
+	}
+
+	/* Ocultar el contenedor de tags por defecto en móvil */
+	.categories-tags {
+		display: none !important; 
+		flex-direction: column;
+		align-items: stretch;
+		gap: 8px;
+		width: 100%;
+		background: var(--bg-card);
+		padding: 16px;
+		border-radius: var(--radius-md);
+		border: 1px solid var(--neon-black);
+	}
+
+	/* Clase que aplicará JavaScript al hacer click para mostrar los tags */
+	.categories-tags.active-mobile {
+		display: flex !important;
+		animation: fadeInUp 0.3s ease-out forwards;
+	}
+
+	.tag-btn {
+		width: 100%;
+		text-align: left;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+}
+}

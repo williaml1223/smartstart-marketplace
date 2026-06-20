@@ -27,7 +27,15 @@
 :root{--bg-dark:#060608;--bg-surface:#0c0c12;--bg-card:#11111a;--bg-card-hover:#161622;--bg-elevated:#1a1a28;--bg-input:#0e0e16;--neon-purple:#bc34fa;--neon-purple-soft:rgba(188,52,250,0.08);--neon-purple-glow:rgba(188,52,250,0.15);--neon-blue:#00f0ff;--neon-blue-soft:rgba(0,240,255,0.06);--neon-blue-glow:rgba(0,240,255,0.12);--neon-black:#1c1c28;--neon-black-light:#252536;--text-main:#f0f0f5;--text-secondary:#b0b0c0;--text-muted:#7e7e92;--text-dim:#555568;--accent-green:#39ff14;--accent-green-soft:rgba(57,255,20,0.08);--accent-orange:#ff9500;--accent-red:#ff4757;--font-title:'Space Grotesk',sans-serif;--font-mono:'JetBrains Mono',monospace;--radius-sm:6px;--radius-md:10px;--radius-lg:14px;--radius-xl:20px;--shadow-sm:0 2px 8px rgba(0,0,0,0.3);--shadow-md:0 8px 24px rgba(0,0,0,0.4);--shadow-glow-purple:0 0 30px rgba(188,52,250,0.12);--shadow-glow-blue:0 0 30px rgba(0,240,255,0.08);--transition-fast:0.15s ease;--transition-smooth:0.3s cubic-bezier(0.25,0.8,0.25,1);--transition-bounce:0.4s cubic-bezier(0.34,1.56,0.64,1)}
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
-body{background-color:var(--bg-dark);color:var(--text-main);font-family:var(--font-mono);overflow-x:hidden;line-height:1.6;font-size:15px}
+body{
+  background-color:var(--bg-dark);
+  color:var(--text-main);
+  font-family:var(--font-mono);
+  overflow-x:hidden;
+  line-height:1.6;
+  font-size:15px;
+
+}
 h1,h2,h3,h4,h5,h6{font-family:var(--font-title);font-weight:700;letter-spacing:-0.02em;line-height:1.2}
 a{text-decoration:none;color:inherit;transition:var(--transition-fast)}
 button{font-family:var(--font-mono);border:none;cursor:pointer;transition:var(--transition-smooth)}
@@ -59,8 +67,23 @@ header.scrolled{background:rgba(6,6,8,0.98);border-bottom-color:rgba(188,52,250,
 .nav-desktop a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:linear-gradient(90deg,var(--neon-purple),var(--neon-blue));transition:var(--transition-smooth);border-radius:1px}
 .nav-desktop a:hover{color:var(--text-main)}
 .nav-desktop a:hover::after{width:100%}
+.filter-mobile-btn {
+	display: none;
+	background: var(--bg-input);
+	border: 1px solid var(--neon-black);
+	color: var(--text-secondary);
+	padding: 12px 20px;
+	border-radius: var(--radius-md);
+	font-size: 0.9rem;
+	font-weight: 600;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	width: 100%;
+	transition: var(--transition-smooth);
+}
 .nav-right{display:flex;align-items:center;gap:16px}
-.cart-trigger{background:var(--bg-surface);border:1px solid var(--neon-black);padding:10px 18px;border-radius:var(--radius-sm);cursor:pointer;color:var(--text-main);font-size:0.85rem;font-weight:500;display:flex;align-items:center;gap:8px;transition:var(--transition-smooth);position:relative}
+.cart-trigger{background:var(--bg-surface);border:1px solid var(--neon-black);padding:10px 18px;border-radius:var(--radius-sm);cursor:pointer;color:var(--text-main);font-size:0.95rem;font-weight:500;display:flex;align-items:center;gap:8px;transition:var(--transition-smooth);position:relative}
 .cart-trigger:hover{border-color:var(--neon-blue);background:var(--neon-blue-soft);box-shadow:0 0 15px var(--neon-blue-glow)}
 .cart-count{background:var(--neon-purple);color:white;font-size:0.7rem;font-weight:700;padding:2px 6px;border-radius:10px;min-width:18px;text-align:center;position:absolute;top:-6px;right:-6px}
 .mobile-menu-btn{display:none;background:none;border:1px solid var(--neon-black);color:var(--text-main);padding:8px 12px;border-radius:var(--radius-sm);font-size:1.2rem}
@@ -267,18 +290,52 @@ footer{background:#040406;border-top:1px solid var(--neon-black);padding:80px 0 
 @media(max-width:768px){.nav-desktop{display:none}.mobile-menu-btn{display:block}.hero{padding:60px 0 50px}.hero-text h1{font-size:2.2rem}.stats-grid{grid-template-columns:1fr 1fr;gap:24px}.stat-number{font-size:1.8rem}.marketplace-controls{top:57px}.controls-top{flex-direction:column;align-items:stretch}.search-wrapper{max-width:100%}.cards-marketplace-grid{grid-template-columns:1fr}.tech-grid{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr;gap:32px}.footer-bottom{flex-direction:column;text-align:center}.confidentiality-card{padding:40px 24px}.security-badges{flex-direction:column;align-items:center}.seller-card{padding:40px 24px}.cart-sidebar{width:100%}.demo-modal{width:95vw;height:80vh}}
 @media(max-width:480px){.hero-cta{flex-direction:column}.btn-primary,.btn-secondary{width:100%;justify-content:center}.hero-badges{flex-direction:column}.hero-badge{justify-content:center}}
 </style>
+<link rel="stylesheet" href="css/style.css">
 <base target="_blank">
 <base target="_blank">
 </head>
 <body>
-<header id="header"><div class="container header-inner"><div class="logo"><div class="logo-icon">S</div>smart<span>Start</span></div><nav class="nav-desktop"><a href="#marketplace">Marketplace</a><a href="#vender">Vender</a><a href="#auditoria">Seguridad</a><a href="#confidencialidad">Privacidad</a><a href="#" onclick="showCart()">Mis Compras</a></nav><div class="nav-right"><button class="cart-trigger" onclick="showCart()"><span>🛒</span>Carrito<span class="cart-count" id="cartCount">0</span></button><button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button></div></div></header>
-<div class="mobile-nav" id="mobileNav"><button class="mobile-nav-close" onclick="toggleMobileMenu()">✕</button><a href="#marketplace" onclick="toggleMobileMenu()">Marketplace</a><a href="#vender" onclick="toggleMobileMenu()">Vender Plantillas</a><a href="#auditoria" onclick="toggleMobileMenu()">Seguridad</a><a href="#confidencialidad" onclick="toggleMobileMenu()">Privacidad</a><a href="#" onclick="toggleMobileMenu();showCart()">Carrito</a></div>
+<header id="header"><div class="container header-inner"><div class="logo"><div class="logo-icon">S</div>smart<span>Start</span></div><nav class="nav-desktop"><a href="#marketplace">Marketplace</a><a href="#vender">Vender</a><a href="#auditoria">Seguridad</a><a href="#confidencialidad">Privacidad</a><a href="#" onclick="showCart()">Mis Compras</a></nav><div class="nav-right"><button class="cart-trigger" onclick="showCart()"><span>🛒</span><p class="card-name">Carrito</p><span class="cart-count" id="cartCount">0</span></button><button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button></div></div></header>
+<div class="mobile-nav" id="mobileNav"><button class="mobile-nav-close" onclick="toggleMobileMenu()">✕</button><a href="#marketplace" onclick="toggleMobileMenu()">Marketplace</a><a href="#vender" onclick="toggleMobileMenu()">Vender Plantillas</a><a href="#auditoria" onclick="toggleMobileMenu()">Seguridad</a><a href="#confidencialidad" onclick="toggleMobileMenu()">Privacidad</a><a href="#" onclick="toggleMobileMenu();showCart()">🛒 <p class="card-name">Carrito</p> </a></div>
 <div class="cart-overlay" id="cartOverlay" onclick="hideCart()"></div><div class="cart-sidebar" id="cartSidebar"><div class="cart-header"><h3>Tu Carrito</h3><button class="cart-close" onclick="hideCart()">✕</button></div><div class="cart-body" id="cartBody"><div class="cart-empty"><div class="icon">🛒</div><p>Tu carrito está vacío</p><p style="font-size:0.8rem;margin-top:8px">Explora el marketplace y encuentra plantillas increíbles</p></div></div><div class="cart-footer" id="cartFooter" style="display:none"><div class="cart-total"><span class="label">Total</span><span class="amount" id="cartTotal">$0.00</span></div><button class="cart-checkout">Proceder al Pago</button></div></div>
 <div class="demo-overlay" id="demoOverlay" onclick="closeDemo()"></div><div class="demo-modal" id="demoModal"><div class="demo-header"><div class="demo-title"><span id="demoIcon">🏥</span><span id="demoTitle">Preview</span></div><div class="demo-actions"><button class="demo-btn" onclick="toggleFullscreen()" title="Pantalla completa"><i class="fas fa-expand"></i></button><button class="demo-btn" onclick="closeDemo()" title="Cerrar"><i class="fas fa-times"></i></button></div></div><div class="demo-body"><iframe id="demoFrame" src="" frameborder="0"></iframe></div><div class="demo-footer"><div class="demo-info"><span class="demo-tag" id="demoTech">HTML5 + Tailwind</span><span class="demo-price" id="demoPrice">$89.00</span></div><div style="display:flex;gap:8px"><button class="btn-secondary" id="demoOpenBtn" onclick="openDemoInNewTab()" style="padding:10px 16px;font-size:0.82rem"><span>🔗</span> Abrir en nueva pestaña</button><button class="btn-primary" id="demoBuyBtn" onclick=""><span>🛒</span> Comprar Ahora</button></div></div></div>
 <section class="hero"><div class="hero-bg"></div><div class="container hero-grid"><div class="hero-text animate-fade-in-up"><h1>Marketplace de<br><span class="gradient-text-purple">Plantillas Web Premium</span>.</h1><p>Compra, vende y descubre plantillas web profesionales de alta calidad. Desde landing pages hasta dashboards completos. Código limpio, listo para producción.</p><div class="hero-cta"><button class="btn-primary" onclick="document.getElementById('marketplace').scrollIntoView({behavior:'smooth'})"><span>⚡</span> Explorar Plantillas</button><button class="btn-secondary" onclick="document.getElementById('vender').scrollIntoView({behavior:'smooth'})"><span>▶</span> Vender Plantillas</button></div><div class="hero-badges"><div class="hero-badge"><span class="icon">⚡</span> Despliegue en 0.4s</div><div class="hero-badge"><span class="icon">🔒</span> Código Auditado</div><div class="hero-badge"><span class="icon">🔧</span> Editor In-Page</div></div></div><div class="hero-terminal animate-fade-in-up animate-delay-2"><div class="terminal-header"><div class="terminal-circle t-red"></div><div class="terminal-circle t-yellow"></div><div class="terminal-circle t-green"></div><span class="terminal-title">smartstart -- marketplace</span></div><div class="terminal-body"><p class="t-comment">// Inicializando marketplace...</p><p><span class="t-prompt">$</span> <span class="t-keyword">npx</span> smartstart-cli marketplace <span class="t-string">"--sync"</span></p><p class="t-success">[OK] 8 plantillas cargadas</p><p class="t-success">[OK] 12K usuarios activos</p><p class="t-success">[OK] 0 vulnerabilidades detectadas</p><p><span class="t-prompt">$</span> <span class="t-keyword">npm</span> run preview-template <span class="t-string">"landing-salud"</span></p><p class="t-highlight">&gt; Preview: http://localhost:3000/template/landing-salud</p><p class="t-success">[OK] Lighthouse Score: 100/100/100/100</p><p class="t-comment">// Tu código fuente te pertenece al 100%</p><p><span class="t-prompt">$</span> _<span class="typing-cursor"></span></p></div></div></div></section>
 <section class="stats-bar"><div class="container"><div class="stats-grid"><div class="stat-item"><div class="stat-number">8<span>+</span></div><div class="stat-label">Plantillas Disponibles</div></div><div class="stat-item"><div class="stat-number">12<span>K</span></div><div class="stat-label">Clientes Activos</div></div><div class="stat-item"><div class="stat-number">99.9<span>%</span></div><div class="stat-label">Uptime Garantizado</div></div><div class="stat-item"><div class="stat-number">4.9<span>/5</span></div><div class="stat-label">Rating Promedio</div></div></div></div></section>
 <div class="section-divider"></div>
-<section class="marketplace-controls" id="marketplace"><div class="container controls-inner"><div class="controls-top"><h3 class="controls-title">Explorar Marketplace</h3><div class="search-wrapper"><span class="search-icon">🔍</span><input type="text" class="search-box" id="searchBox" placeholder="Buscar por tecnología, industria o estilo..." onkeyup="filterTemplates()"></div><select class="sort-dropdown" id="sortDropdown" onchange="sortTemplates()"><option value="popular">Más Populares</option><option value="newest">Más Recientes</option><option value="price-low">Precio: Menor a Mayor</option><option value="price-high">Precio: Mayor a Menor</option><option value="rating">Mejor Valorados</option></select></div><div class="categories-tags"><button class="tag-btn active" data-category="all" onclick="filterCategory('all')">Todos <span class="count">8</span></button><button class="tag-btn" data-category="salud" onclick="filterCategory('salud')">Salud <span class="count">1</span></button><button class="tag-btn" data-category="empresas" onclick="filterCategory('empresas')">Empresas <span class="count">1</span></button><button class="tag-btn" data-category="portafolio" onclick="filterCategory('portafolio')">Portafolios <span class="count">2</span></button><button class="tag-btn" data-category="ecommerce" onclick="filterCategory('ecommerce')">E-commerce <span class="count">1</span></button><button class="tag-btn" data-category="restaurantes" onclick="filterCategory('restaurantes')">Restaurantes <span class="count">1</span></button><button class="tag-btn" data-category="fotografia" onclick="filterCategory('fotografia')">Fotografía <span class="count">1</span></button><button class="tag-btn" data-category="servicios" onclick="filterCategory('servicios')">Servicios <span class="count">1</span></button></div></div></section>
+<section class="marketplace-controls">
+	<div class="container">
+		<div class="controls-inner">
+			
+			<div class="controls-top">
+				<h3 class="controls-title">Explorar Plantillas</h3>
+				<div class="search-wrapper">
+					<i class="fa-solid fa-magnifying-glass search-icon"></i>
+					<input type="text" class="search-box" placeholder="Buscar por tecnología, estilo...">
+				</div>
+				<select class="sort-dropdown">
+					<option value="popular">Más populares</option>
+					<option value="recent">Más recientes</option>
+					<option value="price-low">Precio: Bajo a Alto</option>
+					<option value="price-high">Precio: Alto a Bajo</option>
+				</select>
+			</div>
+
+			<button id="filter-toggle-btn" class="filter-mobile-btn">
+				<i class="fa-solid fa-sliders"></i> Filtros
+			</button>
+
+			<div id="categories-tags-container" class="categories-tags">
+				<button class="tag-btn active">Todos <span class="count">7</span></button>
+				<button class="tag-btn">Landing Pages <span class="count">3</span></button>
+				<button class="tag-btn">E-commerce <span class="count">2</span></button>
+				<button class="tag-btn">Admin Panels <span class="count">1</span></button>
+				<button class="tag-btn">Portafolios <span class="count">1</span></button>
+			</div>
+
+		</div>
+	</div>
+</section>
+
 <section class="shop-section"><div class="container"><div class="section-header"><div><h2>Colección <span class="gradient-text-blue">Disponible</span></h2><p>Plantillas profesionales diseñadas para convertir visitantes en clientes</p></div><a href="#" class="view-all-btn">Ver todos <i class="fas fa-arrow-right"></i></a></div><div class="cards-marketplace-grid" id="templatesGrid">
 <div class="ecommerce-card" data-category="salud" data-price="89" data-rating="4.9" data-name="health-insurance-healthguard-v1.0"><div class="card-media"><span class="emoji">🏥</span><span class="card-badge badge-green">Nuestro</span><span class="live-indicator"><span class="live-dot"></span> LIVE PREVIEW</span></div><div class="card-body"><div class="card-meta"><span class="tech-spec">ID: SS-HEALTH-01 // HTML5 + TAILWIND</span><div class="card-rating"><span class="stars">★★★★★</span> 4.9</div></div><h3>HealthGuard - Seguro de Salud</h3><p class="card-description">Landing page profesional para seguros médicos. Cotizador interactivo, comparador de planes, testimonios y FAQ completo.</p><div class="card-tags"><span class="card-tag">HTML5</span><span class="card-tag">Tailwind</span><span class="card-tag">Responsive</span></div><div class="card-footer"><span class="card-price">$89.00</span><div class="card-actions"><button class="demo-preview-btn" onclick="openDemo('HealthGuard - Seguro de Salud','🏥','HTML5 + Tailwind',89,'src/templates/health/health-insurance-healthguard-v1.0.html')"><i class="fas fa-eye"></i> Demo</button><button class="buy-btn" onclick="addToCart('HealthGuard - Seguro de Salud',89,'🏥')">+ Añadir</button></div></div></div></div>
 <div class="ecommerce-card" data-category="empresas" data-price="79" data-rating="4.8" data-name="business-small-bizgrow-v1.0"><div class="card-media"><span class="emoji">🏢</span><span class="card-badge badge-green">Nuestro</span><span class="live-indicator"><span class="live-dot"></span> LIVE PREVIEW</span></div><div class="card-body"><div class="card-meta"><span class="tech-spec">ID: SS-BIZ-01 // HTML5 + TAILWIND</span><div class="card-rating"><span class="stars">★★★★★</span> 4.8</div></div><h3>BizGrow - Pequeñas Empresas</h3><p class="card-description">Landing page para negocios locales. Servicios, testimonios, portfolio, contacto y CTA optimizados para conversión.</p><div class="card-tags"><span class="card-tag">HTML5</span><span class="card-tag">Tailwind</span><span class="card-tag">SEO</span></div><div class="card-footer"><span class="card-price">$79.00</span><div class="card-actions"><button class="demo-preview-btn" onclick="openDemo('BizGrow - Pequeñas Empresas','🏢','HTML5 + Tailwind',79,'src/templates/business/business-small-bizgrow-v1.0.html')"><i class="fas fa-eye"></i> Demo</button><button class="buy-btn" onclick="addToCart('BizGrow - Pequeñas Empresas',79,'🏢')">+ Añadir</button></div></div></div></div>
@@ -355,5 +412,6 @@ function openDemoInNewTab(){const file=document.getElementById('demoFrame').src;
 if('IntersectionObserver' in window){const imageObserver=new IntersectionObserver((entries)=>{entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('visible')}})});document.querySelectorAll('.ecommerce-card').forEach(card=>imageObserver.observe(card))}
 window.addEventListener('message',function(e){if(e.data==='closeDemo'){closeDemo()}if(e.data==='buyTemplate'){addToCart('smartStart - Marketplace Template',199,'🚀');closeDemo()}});
 </script>
+<script src="scripts/pop.js"></script>
 </body>
 </html>
